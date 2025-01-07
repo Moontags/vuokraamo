@@ -37,10 +37,19 @@
                         Hae
                     </button>
                 </form>
-                <a href="{{ url('/login') }}" class="text-gray-700 hover:text-blue-500">Kirjaudu</a>
+                <a href="{{ url('/kirjaudu') }}" class="text-gray-700 hover:text-blue-500">Kirjaudu</a>
             </div>
         </div>
     </header>
+    <script>
+        setTimeout(() => {
+            const successMessage = document.querySelector('.bg-green-100');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000); // 5 sekuntia
+    </script>
+
 
 </body>
 </html>

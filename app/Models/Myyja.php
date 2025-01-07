@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Myyja extends Model
+class Myyja extends Authenticatable
 {
-    use HasFactory;
+    // Määritetään taulun nimi
+    protected $table = 'myyja';
 
-    protected $table = 'myyja'; // Tietokantataulun nimi
+    // Määritetään ensisijainen avain
+    protected $primaryKey = 'myyjaID';
+
+    // Sallitaan mass assignable kentät
     protected $fillable = [
         'nimi',
         'kayttajatunnus',
@@ -18,6 +21,12 @@ class Myyja extends Model
     ];
 
     protected $hidden = [
-        'salasana',
+        'salasana', 'remember_token',
     ];
+
+    // Korvaa oletussalasana-attribuutin nimi
+    public function getAuthPassword()
+    {
+        return $this->salasana;
+    }
 }
