@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AsiakasController;
+use App\Http\Controllers\TuoteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,4 +15,6 @@ Route::get('asiakas/{asiakas}', [AsiakasController::class, 'show'])->name('asiak
 Route::get('asiakas/{asiakas}/edit', [AsiakasController::class, 'edit'])->name('asiakas.edit');
 Route::put('asiakas/{asiakas}', [AsiakasController::class, 'update'])->name('asiakas.update');
 Route::delete('asiakas/{asiakas}', [AsiakasController::class, 'destroy'])->name('asiakas.destroy');
+Route::resource('tuote', TuoteController::class);
+
 

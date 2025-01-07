@@ -1,0 +1,42 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6">Tuotetiedot</h1>
+
+    <a href="{{ route('tuote.create') }}" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää uusi tuote</a>
+
+    <table class="min-w-full bg-white border border-gray-300">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="border border-gray-300 px-4 py-2">#</th>
+                <th class="border border-gray-300 px-4 py-2">Nimi</th>
+                <th class="border border-gray-300 px-4 py-2">Kpl</th>
+                <th class="border border-gray-300 px-4 py-2">Painoraja</th>
+                <th class="border border-gray-300 px-4 py-2">Kuva</th>
+                <th class="border border-gray-300 px-4 py-2">Toiminnot</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($tuotes as $tuote)
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->id }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->nimi }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->kpl }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->painoraja }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->kuva }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a href="{{ route('tuote.show', $tuote->id) }}" class="text-blue-500">Katso</a> |
+                        <a href="{{ route('tuote.edit', $tuote->id) }}" class="text-yellow-500">Päivitä</a> |
+                        <form action="{{ route('tuote.destroy', $tuote->id) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500" onclick="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">Poista</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection
