@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tuote extends Model
 {
+    protected $table = 'tuote';
+    protected $primaryKey = 'tuoteID';
+    public $incrementing = true;
+    protected $keyType = 'int';
+
     protected $fillable = [
         'nimi',
         'kuvaus',
@@ -13,5 +18,4 @@ class Tuote extends Model
         'painoraja',
         'kuva',
     ];
-
 }

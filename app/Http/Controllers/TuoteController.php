@@ -12,8 +12,9 @@ class TuoteController extends Controller
      */
     public function index()
     {
-        $tuotes = Tuote::all();
+        $tuotes = Tuote::all(); // Määritellään muuttuja $tuotes
         return view('tuote.index', compact('tuotes'));
+
     }
 
 
