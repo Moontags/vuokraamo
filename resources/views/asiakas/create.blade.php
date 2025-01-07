@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lisää uusi asiakas</title>
-    @vite('resources/css/app.css') <!-- Tailwind CSS -->
+    @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100">
+    @include('inc.header')
+
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-6">Lisää uusi asiakas</h1>
 
@@ -55,5 +57,6 @@
             <a href="{{ route('asiakas.index') }}" class="text-gray-500 ml-4">Peruuta</a>
         </form>
     </div>
+    @include('inc.footer')
 </body>
 </html>

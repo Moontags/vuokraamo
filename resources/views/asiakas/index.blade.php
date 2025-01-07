@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vuokraamo - Asiakkaat</title>
-    @vite('resources/css/app.css') <!-- Tailwind CSS -->
+    @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto py-8">
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    @include('inc.header')
+
+    <div class="container mx-auto py-8 flex-grow">
         <h1 class="text-3xl font-bold mb-6">Asiakastiedot</h1>
 
         <a href="{{ route('asiakas.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää uusi asiakas</a>
@@ -43,5 +45,7 @@
             </tbody>
         </table>
     </div>
+
+    @include('inc.footer')
 </body>
 </html>

@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 
 class AsiakasController extends Controller
 {
-    // Näytä kaikki asiakkaat
+
     public function index()
     {
-        $asiakkaat = Asiakas::all(); // Hae kaikki asiakkaat tietokannasta
-        return view('asiakas.index', compact('asiakkaat')); // Palauta näkymä
+        $asiakkaat = Asiakas::all();
+        return view('asiakas.index', compact('asiakkaat'));
     }
 
-    // Näytä lomake uuden asiakkaan luomiseen
+
     public function create()
     {
         return view('asiakas.create');
     }
 
-    // Tallenna uusi asiakas
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -38,14 +37,11 @@ class AsiakasController extends Controller
         return redirect()->route('asiakas.index')->with('success', 'Asiakas lisätty onnistuneesti!');
     }
 
-
-    // Näytä yksittäisen asiakkaan tiedot
     public function show(Asiakas $asiakas)
     {
         return view('asiakas.show', compact('asiakas'));
     }
 
-    // Näytä lomake asiakkaan muokkaamiseen
     public function edit(\App\Models\Asiakas $asiakas)
     {
         return view('asiakas.edit', compact('asiakas'));
@@ -62,16 +58,14 @@ public function update(Request $request, \App\Models\Asiakas $asiakas)
         'puhelin' => 'nullable|string|max:15',
     ]);
 
-    $asiakas->update($validatedData); // Päivitä tiedot
+    $asiakas->update($validatedData);
 
     return redirect()->route('asiakas.index')->with('success', 'Asiakastiedot päivitetty onnistuneesti!');
 }
 
-
-    // Poista asiakas
     public function destroy(Asiakas $asiakas)
     {
-        $asiakas->delete(); // Poista asiakas tietokannasta
+        $asiakas->delete();
 
         return redirect()->route('asiakas.index')->with('success', 'Asiakas poistettu onnistuneesti!');
     }

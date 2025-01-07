@@ -7,6 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100">
+    @include('inc.header')
     <div class="container mx-auto p-4">
         <h3 class="text-2xl font-bold mb-4">Asiakastiedot</h3>
         <div class="mb-4">
