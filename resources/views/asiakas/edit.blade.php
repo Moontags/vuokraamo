@@ -6,9 +6,12 @@
     <title>Muokkaa asiakasta</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Header -->
     @include('inc.header')
-    <div class="container mx-auto py-8">
+
+    <!-- Sisältö -->
+    <div class="container mx-auto py-8 flex-grow">
         <h1 class="text-3xl font-bold mb-6">Muokkaa asiakasta</h1>
 
         @if ($errors->any())
@@ -21,8 +24,8 @@
             </div>
         @endif
 
-        <form action="{{ route('asiakas.update', $asiakas->id) }}" method="POST" class="bg-white p-6 rounded shadow-md">
-
+        <!-- Lomake -->
+        <form action="{{ route('asiakas.update', $asiakas->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -59,6 +62,12 @@
             <a href="{{ route('asiakas.index') }}" class="text-gray-500 ml-4">Peruuta</a>
         </form>
     </div>
-    @include('inc.footer')
+
+    <!-- Footer -->
+    <footer class="bg-white shadow mt-auto">
+        <div class="container mx-auto py-4 text-center text-gray-600">
+            &copy; {{ date('Y') }} Vuokraamo. Kaikki oikeudet pidätetään.
+        </div>
+    </footer>
 </body>
 </html>

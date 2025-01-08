@@ -3,20 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Myyja extends Authenticatable
 {
-    // Määritetään taulun nimi
-    protected $table = 'myyja';
+    use HasFactory, Notifiable;
 
-    // Määritetään ensisijainen avain
-    protected $primaryKey = 'myyjaID';
+    protected $table = 'myyja'; // Tietokantataulu
 
-    // Sallitaan mass assignable kentät
+    protected $primaryKey = 'myyjaID'; // Ensisijainen avain
+
     protected $fillable = [
         'nimi',
         'kayttajatunnus',
-        'salasana',
+        'salasana', // Muista, että salasana täytyy käsitellä turvallisesti!
         'rooli',
     ];
 
@@ -24,9 +25,13 @@ class Myyja extends Authenticatable
         'salasana', 'remember_token',
     ];
 
-    // Korvaa oletussalasana-attribuutin nimi
+    /**
+     * Palauttaa sarakkeen, jota käytetään salasana-tarkistukseen.
+     */
     public function getAuthPassword()
     {
         return $this->salasana;
     }
+
+    public $timestamps = true;
 }

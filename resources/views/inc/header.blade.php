@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vuokraamo</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
     <header class="bg-white shadow">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
             <!-- Logo tai Sivun Nimi -->
             <a href="{{ url('/') }}" class="text-lg font-bold text-gray-700">
                 Vuokraamo
@@ -37,19 +37,33 @@
                         Hae
                     </button>
                 </form>
-                <a href="{{ url('/kirjaudu') }}" class="text-gray-700 hover:text-blue-500">Kirjaudu</a>
+
+                <!-- Tarkista kirjautumistila -->
+                @if (tarkistaKirjautuminen())
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-gray-700 hover:text-red-500 flex items-center">
+                            <i class="bi bi-box-arrow-right text-lg"></i>
+                            <span class="ml-1">Ulos</span>
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ url('/kirjaudu') }}" class="text-gray-700 hover:text-blue-500 flex items-center">
+                        <i class="bi bi-box-arrow-in-right text-lg"></i>
+                        <span class="ml-1">Kirjaudu</span>
+                    </a>
+                @endif
             </div>
         </div>
     </header>
+
     <script>
         setTimeout(() => {
             const successMessage = document.querySelector('.bg-green-100');
             if (successMessage) {
                 successMessage.style.display = 'none';
             }
-        }, 3000); // 5 sekuntia
+        }, 3000); // 3 sekuntia
     </script>
-
-
 </body>
 </html>

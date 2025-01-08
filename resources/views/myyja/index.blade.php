@@ -23,7 +23,7 @@
         <tbody>
             @foreach ($myyjats as $myyja)
             <tr>
-                <td class="border border-gray-300 px-4 py-2">{{ $myyja->id }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $myyja->myyjaID }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $myyja->nimi }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $myyja->kayttajatunnus }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $myyja->rooli }}</td>

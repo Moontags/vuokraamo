@@ -9,6 +9,7 @@
 <body class="bg-gray-100 flex flex-col min-h-screen">
     @include('inc.header')
 
+
     <div class="container mx-auto py-8 flex-grow">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
@@ -16,7 +17,8 @@
         </div>
         @endif
 
-        <h1 class="text-3xl font-bold mb-6">Asiakastiedot</h1>
+
+        <h1 class="text-3xl font-bold mb-6 mt-6">Asiakastiedot</h1>
 
         <a href="{{ route('asiakas.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää uusi asiakas</a>
 
