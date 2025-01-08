@@ -6,8 +6,8 @@
     <title>Kirjaudu sisään</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 flex justify-center items-center h-screen">
-    <div class="bg-white p-8 rounded shadow-md w-96">
+<body class="flex justify-center items-center h-screen">
+    <div class="p-8 rounded shadow-sm w-96">
         <h2 class="text-2xl font-bold mb-4 text-center">Kirjaudu sisään</h2>
 
         @if (session('success'))
@@ -36,7 +36,7 @@
                 <input type="password" name="salasana" id="salasana" class="w-full border border-gray-300 px-4 py-2 rounded" required>
             </div>
 
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Kirjaudu</button>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded w-full">Kirjaudu</button>
         </form>
 
     </div>

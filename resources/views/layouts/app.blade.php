@@ -6,7 +6,7 @@
     <title>@yield('title', 'Vuokraamo')</title>
     @vite('resources/css/app.css') <!-- Tailwind CSS -->
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
     @include('inc.header')
 
     <main class="flex-grow container mx-auto py-8">

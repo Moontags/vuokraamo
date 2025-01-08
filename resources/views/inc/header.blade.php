@@ -8,14 +8,14 @@
 </head>
 <body>
     <header class="bg-white shadow">
-        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div class="container  mx-auto px-4 py-6 flex justify-between items-center">
             <!-- Logo tai Sivun Nimi -->
-            <a href="{{ url('/') }}" class="text-lg font-bold text-gray-700">
+            <a href="{{ url('/') }}" class="text-lg font-bold text-black">
                 Vuokraamo
             </a>
 
             <!-- Navigointi -->
-            <nav class="flex space-x-4">
+            <nav class="flex space-x-8">
                 <a href="{{ url('/asiakas') }}" class="text-gray-700 hover:text-blue-500">Asiakas</a>
                 <a href="{{ url('/tuote') }}" class="text-gray-700 hover:text-blue-500">Tuote</a>
                 <a href="{{ url('/myyja') }}" class="text-gray-700 hover:text-blue-500">Myyjä</a>
@@ -34,7 +34,7 @@
                         type="submit"
                         class="absolute right-0 top-0 mr-2 mt-2 text-blue-500 hover:text-blue-700"
                     >
-                        Hae
+                        Etsi
                     </button>
                 </form>
 

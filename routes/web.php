@@ -5,6 +5,7 @@ use App\Http\Controllers\AsiakasController;
 use App\Http\Controllers\MyyjaController;
 use App\Http\Controllers\TuoteController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VuokrausController;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\AppHelper;
 
@@ -30,6 +31,8 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+Route::get('/vuokraus', [VuokrausController::class, 'lomake'])->name('vuokraus.lomake');
+Route::post('/vuokraus', [VuokrausController::class, 'tallenna'])->name('vuokraus.tallenna');
 
 
 
