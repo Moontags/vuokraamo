@@ -13,7 +13,7 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
-        return view('auth.login');
+        return view('auth.login'); // Varmista, että auth/login.blade.php on olemassa
     }
 
     /**
@@ -42,22 +42,17 @@ class AuthController extends Controller
         ])->onlyInput('kayttajatunnus');
     }
 
-
     /**
      * Käsittele uloskirjautuminen.
      */
     public function logout(Request $request)
     {
-        // Kirjaa käyttäjä ulos
         Auth::logout();
 
-        // Tyhjennä istunto
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        $request->session()->forget('kirjautunut');
-        $request->session()->forget('kayttajatunnus');
 
-        return redirect('/kirjaudu')->with('success', 'Uloskirjautuminen onnistui!');
+        return redirect('/')->with('success', 'Uloskirjautuminen onnistui!');
     }
 
     /**

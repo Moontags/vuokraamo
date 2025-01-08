@@ -5,6 +5,7 @@ use App\Http\Controllers\AsiakasController;
 use App\Http\Controllers\MyyjaController;
 use App\Http\Controllers\TuoteController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use App\Helpers\AppHelper;
 
 Route::get('/', function () {
@@ -25,14 +26,10 @@ Route::resource('myyja', MyyjaController::class);
 Route::delete('myyja/{myyja}', [MyyjaController::class, 'destroy'])->name('myyja.destroy');
 Route::get('/kirjaudu', [AuthController::class, 'loginForm'])->name('kirjaudu');
 Route::post('/kirjaudu', [AuthController::class, 'authenticate'])->name('kirjaudu.post');
-Route::get('/logout', function () {
-    session_start();
-    session_unset();
-    session_destroy();
-    return redirect('/kirjaudu')->with('success', 'Uloskirjautuminen onnistui!');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
 })->name('logout');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 
 
 

@@ -6,6 +6,11 @@
     <title>Vuokraamo</title>
     @vite('resources/css/app.css') <!-- Tailwind CSS -->
 </head>
+@if (session('success'))
+    <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
 <body class="bg-gray-100 flex flex-col min-h-screen">
     @include('inc.header')
 

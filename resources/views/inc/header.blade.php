@@ -39,7 +39,8 @@
                 </form>
 
                 <!-- Tarkista kirjautumistila -->
-                @if (tarkistaKirjautuminen())
+                @auth
+                    <!-- Jos käyttäjä on kirjautunut -->
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-gray-700 hover:text-red-500 flex items-center">
@@ -48,11 +49,12 @@
                         </button>
                     </form>
                 @else
+                    <!-- Jos käyttäjä ei ole kirjautunut -->
                     <a href="{{ url('/kirjaudu') }}" class="text-gray-700 hover:text-blue-500 flex items-center">
                         <i class="bi bi-box-arrow-in-right text-lg"></i>
                         <span class="ml-1">Kirjaudu</span>
                     </a>
-                @endif
+                @endauth
             </div>
         </div>
     </header>
