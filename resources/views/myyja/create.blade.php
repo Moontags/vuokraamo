@@ -6,10 +6,10 @@
     <title>Lisää Myyjä</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
     @include('inc.header')
 
-    <div class="container mx-auto py-8 flex-grow">
+    <div class="container max-w-4xl mx-auto py-8 flex-grow mt-8">
         <h1 class="text-3xl font-bold mb-6">Lisää Myyjä</h1>
 
         @if ($errors->any())

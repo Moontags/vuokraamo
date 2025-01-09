@@ -31,7 +31,12 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+<<<<<<< HEAD
 Route::resource('vuokraus', VuokrausController::class);
+=======
+Route::get('/vuokraus', [VuokrausController::class, 'lomake'])->name('vuokraus.lomake');
+Route::post('/vuokraus', [VuokrausController::class, 'tallenna'])->name('vuokraus.tallenna');
+>>>>>>> origin/main
 
 
 

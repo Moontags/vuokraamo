@@ -6,11 +6,11 @@
     <title>Vuokraamo - Asiakkaat</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
     @include('inc.header')
 
 
-    <div class="container mx-auto py-8 flex-grow mt-8">
+    <div class="container mx-auto py-8 flex-grow">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
            {{ session('success') }}
@@ -24,7 +24,7 @@
         <table class="min-w-full bg-white border border-gray-300 text-center">
             <thead class="bg-gray-200">
                 <tr>
-                    <th class="border border-gray-300 px-4 py-2">#</th>
+                    <th class="border border-gray-300 px-4 py-2">ID</th>
                     <th class="border border-gray-300 px-4 py-2">Etunimi</th>
                     <th class="border border-gray-300 px-4 py-2">Sukunimi</th>
                     <th class="border border-gray-300 px-4 py-2">Sähköposti</th>
