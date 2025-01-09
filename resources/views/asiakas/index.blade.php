@@ -10,17 +10,16 @@
     @include('inc.header')
 
 
-    <div class="container mx-auto py-8 flex-grow">
+    <div class="container mx-auto py-8 flex-grow mt-8">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
            {{ session('success') }}
         </div>
         @endif
 
+        <h1 class="text-3xl font-bold mb-6">Asiakastiedot</h1>
 
-        <h1 class="text-3xl font-bold mb-6 mt-6">Asiakastiedot</h1>
-
-        <a href="{{ route('asiakas.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää uusi asiakas</a>
+        <a href="{{ route('asiakas.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää asiakas</a>
 
         <table class="min-w-full bg-white border border-gray-300 text-center">
             <thead class="bg-gray-200">

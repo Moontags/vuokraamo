@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tuotes', function (Blueprint $table) {
-            $table->id();
+        Schema::create('tuote', function (Blueprint $table) {
+            $table->id('tuoteID');
             $table->string('nimi');
             $table->text('kuvaus')->nullable();
-            $table->decimal('hinta', 8, 2);
-            $table->integer('varastossa')->default(0);
+            $table->string('kategoria')->nullable();
+            $table->integer('kpl')->nullable();
+            $table->decimal('vuokraushinta', 8, 2)->nullable();
             $table->timestamps();
         });
+
     }
 
 
