@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Asiakas:</label>
-            <select name="asiakasID" required class="border rounded px-4 py-2 w-full">
+            <select name="asiakasID" class="w-full border border-gray-300 px-4 py-2 rounded">
                 @foreach ($asiakkaat as $asiakas)
                     <option value="{{ $asiakas->id }}">{{ $asiakas->nimi }}</option>
                 @endforeach
@@ -16,12 +16,12 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Vuokrauspäivä:</label>
+            <label class="block text-gray-700 font-bold mb-2">Vuokrauspäivämäärä:</label>
             <input type="date" name="vuokrauspvm" required class="border rounded px-4 py-2 w-full">
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Palautuspäivä:</label>
+            <label class="block text-gray-700 font-bold mb-2">Palautuspäivämäärä:</label>
             <input type="date" name="palautuspvm" class="border rounded px-4 py-2 w-full">
         </div>
 
@@ -29,7 +29,7 @@
             <label class="block text-gray-700 font-bold mb-2">Tuotteet:</label>
             @foreach ($tuotteet as $tuote)
                 <div>
-                    <input type="checkbox" name="tuotteet[]" value="{{ $tuote->tuoteID }}">
+                    <input type="checkbox" name="tuotteet[]" value="{{ $tuote->id }}">
                     <label>{{ $tuote->nimi }}</label>
                 </div>
             @endforeach

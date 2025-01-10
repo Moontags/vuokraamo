@@ -10,7 +10,7 @@
     @include('inc.header')
 
 
-    <div class="container mx-auto py-8 flex-grow">
+    <div class="container mx-auto py-8 flex-grow mt-8">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
            {{ session('success') }}

@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold mb-6">Vuokraukset</h1>
 
     @if ($vuokraukset->isEmpty())
-        <p class="text-gray-600">Ei vuokrauksia tällä hetkellä.</p>
+        <p>Ei vuokrauksia tällä hetkellä.</p>
     @else
         <table class="min-w-full bg-white border border-gray-300 text-center">
             <thead class="bg-gray-200">
