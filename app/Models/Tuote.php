@@ -15,7 +15,7 @@ class Tuote extends Model
         'nimi',
         'kuvaus',
         'kpl',
-        'painoraja',
+        'hinta',
         'kuva',
     ];
 }

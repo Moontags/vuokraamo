@@ -12,8 +12,8 @@
         <div class="mb-4">
             <p><strong>Nimi:</strong> {{ $tuote->nimi }}</p>
             <p><strong>Kuvaus:</strong> {{ $tuote->kuvaus }}</p>
+            <p><strong>Hinta:</strong> {{ number_format($tuote->hinta, 2) }} €</p>
             <p><strong>Kappalemäärä:</strong> {{ $tuote->kpl }}</p>
-            <p><strong>Painoraja:</strong> {{ $tuote->painoraja }} kg</p>
             <p><strong>Kuva:</strong></p>
             <img src="{{ asset('storage/' . $tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md">
         </div>

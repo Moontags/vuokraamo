@@ -32,8 +32,8 @@
         </div>
 
         <div class="mb-4">
-            <label for="painoraja" class="block text-gray-700 font-bold">Painoraja:</label>
-            <input type="number" name="painoraja" id="painoraja" value="{{ old('painoraja') }}" class="w-full border border-gray-300 px-4 py-2 rounded">
+            <label for="hinta" class="block text-gray-700 font-bold">Hinta:</label>
+            <input type="number" name="hinta" id="hinta" value="{{ old('hinta') }}" class="w-full border border-gray-300 px-4 py-2 rounded">
         </div>
 
         <div class="mb-4">

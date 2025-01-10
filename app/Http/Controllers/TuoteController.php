@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tuote;
-use Illuminate\Support\Facades\Storage; // Add this line
+use Illuminate\Support\Facades\Storage;
+
 
 class TuoteController extends Controller
 {
@@ -35,7 +36,7 @@ class TuoteController extends Controller
             'nimi' => 'required|string|max:255',
             'kuvaus' => 'required|string',
             'kpl' => 'required|integer|min:1|max:20',
-            'painoraja' => 'required|integer|min:5|max:300',
+            'hinta' => 'required|integer|min:5|max:300',
             'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -50,7 +51,7 @@ class TuoteController extends Controller
             'nimi' => $request->input('nimi'),
             'kuvaus' => $request->input('kuvaus'),
             'kpl' => $request->input('kpl'),
-            'painoraja' => $request->input('painoraja'),
+            'hinta' => $request->input('hinta'),
             'kuva' => $kuvaPolku,
         ]);
 
@@ -80,36 +81,41 @@ class TuoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        // Validoi lomaketiedot
-        $request->validate([
-            'nimi' => 'required|string|max:255',
-            'kuvaus' => 'required|string',
-            'kpl' => 'required|integer|min:1|max:20',
-            'painoraja' => 'required|integer|min:5|max:300',
-            'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
 
-        $tuote = Tuote::findOrFail($id);
+     public function update(Request $request, $id)
+     {
+         $request->validate([
+             'nimi' => 'required|string|max:255',
+             'kuvaus' => 'required|string',
+             'kpl' => 'required|integer|min:1',
+             'hinta' => 'required|numeric|min:0',
+             'kategoria' => 'required|string|max:255',
+             'kuva' => 'nullable|image|max:2048', // Max 2 MB
+         ]);
 
-        // Päivitä kuva, jos uusi kuva on ladattu
-        if ($request->hasFile('kuva')) {
-            $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
-            $tuote->kuva = $kuvaPolku;
-        }
+         $tuote = Tuote::findOrFail($id);
 
-        // Päivitä tuotteen tiedot
-        $tuote->update([
-            'nimi' => $request->input('nimi'),
-            'kuvaus' => $request->input('kuvaus'),
-            'kpl' => $request->input('kpl'),
-            'painoraja' => $request->input('painoraja'),
-        ]);
+         if ($request->hasFile('kuva')) {
+             // Poista vanha kuva, jos sellainen on
+             if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
+                 Storage::delete('public/' . $tuote->kuva);
+             }
 
-        // Ohjaa takaisin tuotteiden listaukseen
-        return redirect()->route('tuote.index')->with('success', 'Tuotteen tiedot päivitetty onnistuneesti!');
-    }
+             // Tallenna uusi kuva
+             $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
+             $tuote->kuva = $kuvaPolku;
+         }
+
+         $tuote->update([
+             'nimi' => $request->input('nimi'),
+             'kuvaus' => $request->input('kuvaus'),
+             'kpl' => $request->input('kpl'),
+             'hinta' => $request->input('hinta'),
+             'kategoria' => $request->input('kategoria'),
+         ]);
+
+         return redirect()->route('tuote.index')->with('success', 'Tuote päivitetty onnistuneesti!');
+     }
 
     /**
      * Remove the specified resource from storage.

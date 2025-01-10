@@ -9,10 +9,17 @@ class Asiakas extends Model
 {
     use HasFactory;
 
-    protected $table = 'asiakas';
-    protected $primaryKey = 'id'; // Ensisijainen avain on 'id'
+    protected $table = 'asiakas'; // Taulun nimi
+    protected $primaryKey = 'id'; // Oletusavain 'id'
+    public $timestamps = true; // Oletus
+
     protected $fillable = [
-        'etunimi', 'sukunimi', 'sahkoposti', 'lahiosoite', 'postinumero', 'postitoimipaikka', 'puhelin',
+        'etunimi',
+        'sukunimi',
+        'sahkoposti',
+        'lahiosoite',
+        'postinumero',
+        'postitoimipaikka',
+        'puhelin',
     ];
-    public $timestamps = true;
 }

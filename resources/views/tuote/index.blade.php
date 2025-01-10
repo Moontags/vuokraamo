@@ -13,21 +13,27 @@
     <table class="min-w-full bg-white border border-gray-300 text-center">
         <thead class="bg-gray-200">
             <tr>
-
                 <th class="border border-gray-300 px-4 py-2">Nimi</th>
                 <th class="border border-gray-300 px-4 py-2">Kpl</th>
-                <th class="border border-gray-300 px-4 py-2">Painoraja</th>
                 <th class="border border-gray-300 px-4 py-2">Kuva</th>
+                <th class="border border-gray-300 px-4 py-2">Hinta</th>
                 <th class="border border-gray-300 px-4 py-2">Toiminnot</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach ($tuotes as $tuote)
                 <tr>
                     <td class="border border-gray-300 px-4 py-2">{{ $tuote->nimi }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $tuote->kpl }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->painoraja }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->kuva }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        @if ($tuote->kuva)
+                            <img src="{{ Storage::url($tuote->kuva) }}" alt="Tuotekuva" class="w-20 h-20 object-cover rounded">
+                        @else
+                            Ei kuvaa
+                        @endif
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">{{ number_format($tuote->hinta, 2) }} €</td>
                     <td class="border border-gray-300 px-4 py-2">
                         <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}" class="text-blue-500">Katso</a> |
                         <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}" class="text-yellow-500">Päivitä</a> |
@@ -37,7 +43,6 @@
                             <button type="submit" class="text-red-500" onclick="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">Poista</button>
                         </form>
                     </td>
-
                 </tr>
             @endforeach
         </tbody>

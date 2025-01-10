@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('kuvaus')->nullable();
             $table->string('kategoria')->nullable();
             $table->integer('kpl')->nullable();
-            $table->decimal('vuokraushinta', 8, 2)->nullable();
+            $table->decimal('hinta', 8, 2)->nullable();
             $table->timestamps();
         });
 

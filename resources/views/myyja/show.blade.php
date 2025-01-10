@@ -13,7 +13,7 @@
         <h1 class="text-3xl font-bold mb-6">Myyjän tiedot</h1>
 
         <div class="bg-white p-6 rounded shadow-md">
-            <p><strong>ID:</strong> {{ $myyja->id }}</p>
+            <p><strong>ID:</strong> {{ $myyja->myyjaID }}</p>
             <p><strong>Nimi:</strong> {{ $myyja->nimi }}</p>
             <p><strong>Käyttäjätunnus:</strong> {{ $myyja->kayttajatunnus }}</p>
             <p><strong>Rooli:</strong> {{ $myyja->rooli }}</p>

@@ -41,10 +41,10 @@
                         <td class="border border-gray-300 px-4 py-2">
                             <a href="{{ route('asiakas.show', $asiakas->id) }}" class="text-blue-500">Näytä</a> |
                             <a href="{{ route('asiakas.edit', $asiakas->id) }}" class="text-yellow-500">Muokkaa</a> |
-                            <form action="{{ route('asiakas.destroy', $asiakas->id) }}" method="POST" class="inline-block">
+                            <form action="{{ route('asiakas.destroy', $asiakas->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500" onclick="return confirm('Haluatko varmasti poistaa tämän asiakkaan?')">Poista</button>
+                                <button type="submit" class="text-red-500">Poista</button>
                             </form>
                         </td>
                     </tr>

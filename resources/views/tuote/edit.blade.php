@@ -25,15 +25,19 @@
                 <input type="number" name="kpl" id="kpl" class="w-full border border-gray-300 px-4 py-2 rounded" value="{{ $tuote->kpl }}" required>
             </div>
             <div class="mb-4">
-                <label for="painoraja" class="block text-gray-700 font-bold">Painoraja (kg)</label>
-                <input type="number" name="painoraja" id="painoraja" class="w-full border border-gray-300 px-4 py-2 rounded" value="{{ $tuote->painoraja }}" required>
+                <label for="hinta" class="block text-gray-700 font-bold">Vuokraushinta</label>
+                <input type="number" step="0.01" name="hinta" id="hinta" class="w-full border border-gray-300 px-4 py-2 rounded" value="{{ $tuote->vuokraushinta }}" required>
+            </div>
+            <div class="mb-4">
+                <label for="kategoria" class="block text-gray-700 font-bold">Kategoria</label>
+                <input type="text" name="kategoria" id="kategoria" class="w-full border border-gray-300 px-4 py-2 rounded" value="{{ $tuote->kategoria }}" required>
             </div>
             <div class="mb-4">
                 <label for="kuva" class="block text-gray-700 font-bold">Kuva</label>
                 <input type="file" name="kuva" id="kuva" class="w-full border border-gray-300 px-4 py-2 rounded">
                 @if ($tuote->kuva)
                     <p class="text-gray-600 mt-2">Nykyinen kuva:</p>
-                    <img src="{{ asset('storage/' . $tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md mt-2">
+                    <img src="{{ Storage::url($tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md mt-2">
                 @endif
             </div>
             <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded w-full">Tallenna</button>
