@@ -19,7 +19,8 @@
     <div class="mt-8 justify-between flex">
         <a href="{{ route('home') }}" class="bg-gray-500 text-white px-4 py-2 rounded ml-4">Palaa</a>
         <a href="{{ route('tuote.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">Lisää tuote</a>
-        <a href="{{ route('vuokraus.index') }}" class="bg-green-500 text-white px-4 py-2 rounded">Vuokralla olevat</a>
+        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-green-500 text-white px-4 py-2 rounded">Vuokralla olevat</a>
+
     </div>
     </div>
 </div>

@@ -31,3 +31,5 @@ Route::resource('vuokraus', VuokrausController::class);
 Route::get('/vuokraus', [VuokrausController::class, 'index'])->name('vuokraus.index');
 Route::get('/vuokraus/create', [VuokrausController::class, 'create'])->name('vuokraus.create');
 Route::post('/vuokraus', [VuokrausController::class, 'store'])->name('vuokraus.store');
+Route::get('/vuokralla', [VuokrausController::class, 'vuokralla'])->name('vuokraus.vuokralla');
+
