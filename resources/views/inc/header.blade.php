@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-    <header class="bg-white shadow">
+    <header class="bg-white shadow-sm">
         <div class="container  mx-auto px-4 py-6 flex justify-between items-center">
             <!-- Logo tai Sivun Nimi -->
             <a href="{{ url('/') }}" class="text-lg font-bold text-black">

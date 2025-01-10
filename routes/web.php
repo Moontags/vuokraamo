@@ -22,7 +22,6 @@ Route::get('tuote/{tuote}/edit', [TuoteController::class, 'edit'])->name('tuote.
 Route::get('/tuote/create', [TuoteController::class, 'create'])->name('tuote.create');
 Route::post('/tuote', [TuoteController::class, 'store'])->name('tuote.store');
 
-
 // Myyjä
 Route::resource('myyja', MyyjaController::class);
 

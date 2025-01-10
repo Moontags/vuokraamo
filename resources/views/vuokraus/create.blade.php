@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-8">
+<div class="container mx-auto py-8 max-w-xl">
     <h1 class="text-3xl font-bold mb-6">Luo uusi vuokraus</h1>
 
     <form action="{{ route('vuokraus.store') }}" method="POST">

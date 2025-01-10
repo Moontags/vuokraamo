@@ -18,9 +18,9 @@
         <h1 class="text-4xl font-bold text-gray-800">Tervetuloa!</h1>
         <p class="mt-4 text-lg text-gray-600">Tutustu valikoimaamme ja löydä juuri sinulle sopivat tuotteet.</p>
     </div>
-    <div class="mt-8">
+    <div class="m-8 justify-end flex ">
         <a href="{{ route('tuote.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded mr-4">Katso tuotteet</a>
-        <a href="{{ route('vuokraus.index') }}" class="bg-green-500 text-white px-4 py-2 rounded">Vuokralla olevat</a>
+
     </div>
 
 
