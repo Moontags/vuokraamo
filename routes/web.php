@@ -1,13 +1,14 @@
-  <?php
+<?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AsiakasController;
 use App\Http\Controllers\TuoteController;
 use App\Http\Controllers\MyyjaController;
 use App\Http\Controllers\VuokrausController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Juuripolku
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Asiakas
 Route::resource('asiakas', AsiakasController::class);
@@ -17,18 +18,16 @@ Route::delete('/asiakas/{asiakas}', [AsiakasController::class, 'destroy'])->name
 
 // Tuote
 Route::resource('tuote', TuoteController::class);
+Route::get('tuote/{tuote}/edit', [TuoteController::class, 'edit'])->name('tuote.edit');
+Route::get('/tuote/create', [TuoteController::class, 'create'])->name('tuote.create');
+Route::post('/tuote', [TuoteController::class, 'store'])->name('tuote.store');
+
 
 // Myyjä
 Route::resource('myyja', MyyjaController::class);
 
 // Vuokraus
 Route::resource('vuokraus', VuokrausController::class);
-
-
-
-
-
-
-
-
-
+Route::get('/vuokraus', [VuokrausController::class, 'index'])->name('vuokraus.index');
+Route::get('/vuokraus/create', [VuokrausController::class, 'create'])->name('vuokraus.create');
+Route::post('/vuokraus', [VuokrausController::class, 'store'])->name('vuokraus.store');

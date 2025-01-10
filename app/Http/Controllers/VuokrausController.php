@@ -10,11 +10,15 @@ class VuokrausController extends Controller
     public function index()
     {
         $vuokraukset = DB::table('vuokraus')
-            ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
-            ->select('vuokraus.*', DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"))
-            ->get();
+        ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
+        ->select('vuokraus.*', DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"))
+        ->get();
 
-        return view('vuokraus.index', compact('vuokraukset'));
+    $tuotteet = DB::table('tuote')
+        ->select('tuoteID as id', 'nimi', 'kuvaus', 'kuva') // Oletetaan, että sarakkeet ovat nämä
+        ->get();
+
+    return view('vuokraus.index', compact('vuokraukset', 'tuotteet'));
     }
 
     public function create()
