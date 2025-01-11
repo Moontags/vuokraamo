@@ -6,7 +6,7 @@
     <title>Tuotteen tiedot</title>
     @vite('resources/css/app.css') <!-- Tailwind CSS -->
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
     @include('inc.header') <!-- Headerin sisällytys -->
 
     <main class="flex-grow flex justify-center items-center">

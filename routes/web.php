@@ -6,6 +6,7 @@ use App\Http\Controllers\TuoteController;
 use App\Http\Controllers\MyyjaController;
 use App\Http\Controllers\VuokrausController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
 // Juuripolku
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,4 +32,13 @@ Route::get('/vuokraus', [VuokrausController::class, 'index'])->name('vuokraus.in
 Route::get('/vuokraus/create', [VuokrausController::class, 'create'])->name('vuokraus.create');
 Route::post('/vuokraus', [VuokrausController::class, 'store'])->name('vuokraus.store');
 Route::get('/vuokralla', [VuokrausController::class, 'vuokralla'])->name('vuokraus.vuokralla');
+
+// Kirjautumislomake
+Route::get('/kirjaudu', [AuthController::class, 'loginForm'])->name('kirjaudu');
+
+// Kirjautumisen käsittely
+Route::post('/kirjaudu', [AuthController::class, 'authenticate'])->name('kirjaudu.post');
+
+// Uloskirjautuminen
+Route::post('/ulos', [AuthController::class, 'logout'])->name('ulos');
 

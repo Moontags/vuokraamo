@@ -9,16 +9,19 @@ class VuokrausController extends Controller
 {
     public function index()
     {
+        // Haetaan vuokraukset (oletetaan, että nämä eivät tarvitse sivutusta)
         $vuokraukset = DB::table('vuokraus')
-        ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
-        ->select('vuokraus.*', DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"))
-        ->get();
+            ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
+            ->select('vuokraus.*', DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"))
+            ->get();
 
-    $tuotteet = DB::table('tuote')
-        ->select('tuoteID as id', 'nimi', 'kuvaus', 'kuva') // Oletetaan, että sarakkeet ovat nämä
-        ->get();
+        // Sivutetaan tuotteet
+        $tuotteet = DB::table('tuote')
+            ->select('tuoteID as id', 'nimi', 'kuvaus', 'kuva') // Oletetaan sarakkeet
+            ->paginate(3); // 3 tuotetta per sivu
 
-    return view('vuokraus.index', compact('vuokraukset', 'tuotteet'));
+        // Palautetaan näkymä
+        return view('vuokraus.index', compact('vuokraukset', 'tuotteet'));
     }
 
     public function create()

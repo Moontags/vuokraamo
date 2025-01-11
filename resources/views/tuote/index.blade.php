@@ -3,15 +3,21 @@
 @section('content')
 <div class="container mx-auto py-8">
     @if (session('success'))
-    <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
+    <div class="bg-green-100 text-green-500 p-4 rounded mb-4">
        {{ session('success') }}
     </div>
     @endif
     <h1 class="text-3xl font-bold mb-6">Tuotetiedot</h1>
-    <a href="{{ route('tuote.create') }}" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">Lisää tuote</a>
+    <div class="flex justify-between items-center mb-4">
+        <!-- Lisää tuote -nappi -->
+        <a href="{{ route('tuote.create') }}" class="bg-green-400 text-white px-4 py-2 rounded">Lisää tuote</a>
 
-    <table class="min-w-full bg-white border border-gray-300 text-center">
-        <thead class="bg-gray-200">
+        <!-- Vuokralla olevat -nappi -->
+        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-green-400 text-white px-4 py-2 rounded">Vuokralla olevat</a>
+    </div>
+
+    <table class="min-w-full bg-white border border-gray-100 text-center">
+        <thead class="bg-gray-100">
             <tr>
                 <th class="border border-gray-300 px-4 py-2">Nimi</th>
                 <th class="border border-gray-300 px-4 py-2">Kpl</th>
@@ -28,20 +34,28 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $tuote->kpl }}</td>
                     <td class="border border-gray-300 px-4 py-2">
                         @if ($tuote->kuva)
-                            <img src="{{ Storage::url($tuote->kuva) }}" alt="Tuotekuva" class="w-20 h-20 object-cover rounded">
+                            <img src="{{ Storage::url($tuote->kuva) }}" alt="Tuotekuva" class="w-12 h-12 object-cover rounded">
                         @else
                             Ei kuvaa
                         @endif
                     </td>
                     <td class="border border-gray-300 px-4 py-2">{{ number_format($tuote->hinta, 2) }} €</td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}" class="text-blue-500">Katso</a> |
-                        <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}" class="text-yellow-500">Päivitä</a> |
-                        <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500" onclick="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">Poista</button>
-                        </form>
+                        <!-- Toimintonapit -->
+                        <div class="flex justify-center space-x-2">
+                            <!-- Katso-nappi -->
+                            <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}" class="bg-blue-400 text-white px-3 py-1 rounded">Katso</a>
+
+                            <!-- Päivitä-nappi -->
+                            <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}" class="bg-yellow-400 text-white px-3 py-1 rounded">Päivitä</a>
+
+                            <!-- Poista-nappi -->
+                            <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Poista</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
