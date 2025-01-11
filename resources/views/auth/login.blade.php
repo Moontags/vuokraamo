@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kirjaudu sisään</title>
     @vite('resources/css/app.css')
+    <style>
+        body {
+            background-image: url('/image/jeep1.jpg'); /* Päivitä polku tarpeen mukaan */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen">
     <!-- Header -->
@@ -12,7 +20,7 @@
 
     <!-- Sisältö -->
     <main class="flex-grow flex justify-center items-center">
-        <div class="p-8 rounded shadow-sm w-96">
+        <div class="bg-white bg-opacity-75 p-8 rounded shadow-sm w-96">
             <h2 class="text-2xl font-bold mb-4 text-center">Kirjaudu sisään</h2>
 
             @if (session('success'))

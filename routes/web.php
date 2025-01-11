@@ -42,3 +42,16 @@ Route::post('/kirjaudu', [AuthController::class, 'authenticate'])->name('kirjaud
 // Uloskirjautuminen
 Route::post('/ulos', [AuthController::class, 'logout'])->name('ulos');
 
+Route::get('/tietosuoja', function () {
+    return view('tietosuoja');
+})->name('tietosuoja');
+
+Route::get('/kayttoehdot', function () {
+    return view('kayttoehdot');
+})->name('kayttoehdot');
+
+Route::get('/yhteytta', function () {
+    return view('yhteytta');
+})->name('yhteytta');
+
+
