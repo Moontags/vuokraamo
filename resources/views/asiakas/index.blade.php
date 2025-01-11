@@ -9,7 +9,6 @@
 <body class="flex flex-col min-h-screen">
     @include('inc.header')
 
-
     <div class="container mx-auto py-8 flex-grow mt-8">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
@@ -39,13 +38,28 @@
                         <td class="border border-gray-300 px-4 py-2">{{ $asiakas->sukunimi }}</td>
                         <td class="border border-gray-300 px-4 py-2">{{ $asiakas->sahkoposti }}</td>
                         <td class="border border-gray-300 px-4 py-2">
-                            <a href="{{ route('asiakas.show', $asiakas->id) }}" class="text-blue-500">Näytä</a> |
-                            <a href="{{ route('asiakas.edit', $asiakas->id) }}" class="text-yellow-500">Muokkaa</a> |
-                            <form action="{{ route('asiakas.destroy', $asiakas->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500">Poista</button>
-                            </form>
+                            <div class="flex justify-center space-x-2">
+                                <!-- Näytä-nappi -->
+                                <a href="{{ route('asiakas.show', $asiakas->id) }}"
+                                   class="bg-blue-500 text-white px-3 py-1 rounded">Näytä</a>
+
+                                <!-- Muokkaa-nappi -->
+                                <a href="{{ route('asiakas.edit', $asiakas->id) }}"
+                                   class="bg-yellow-500 text-white px-3 py-1 rounded">Muokkaa</a>
+
+                                <!-- Poista-nappi -->
+                                <form action="{{ route('asiakas.destroy', $asiakas->id) }}"
+                                      method="POST"
+                                      class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="bg-red-500 text-white px-3 py-1 rounded"
+                                            onclick="return confirm('Haluatko varmasti poistaa tämän asiakkaan?')">
+                                        Poista
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

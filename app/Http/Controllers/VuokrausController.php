@@ -24,6 +24,9 @@ class VuokrausController extends Controller
         return view('vuokraus.index', compact('vuokraukset', 'tuotteet'));
     }
 
+// Removed duplicate method
+
+
     public function create()
     {
         $asiakkaat = DB::table('asiakas')
@@ -70,22 +73,21 @@ class VuokrausController extends Controller
         return redirect()->route('vuokraus.index')->with('success', 'Vuokraus tallennettu onnistuneesti!');
     }
     public function vuokralla()
-{
-    $vuokraukset = DB::table('vuokraus')
-        ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
-        ->join('vuokrausrivi', 'vuokraus.id', '=', 'vuokrausrivi.vuokrausID')
-        ->join('tuote', 'vuokrausrivi.tuoteID', '=', 'tuote.tuoteID')
-        ->select(
-            'vuokraus.id',
-            DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"),
-            'vuokraus.vuokrauspvm',
-            'vuokraus.palautuspvm',
-            'tuote.nimi as tuote',
-            'tuote.kuva'
-        )
-        ->get();
+    {
+        $vuokraukset = DB::table('vuokraus')
+            ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
+            ->join('vuokrausrivi', 'vuokraus.id', '=', 'vuokrausrivi.vuokrausID')
+            ->join('tuote', 'vuokrausrivi.tuoteID', '=', 'tuote.tuoteID')
+            ->select(
+                'vuokraus.id',
+                DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"),
+                'vuokraus.vuokrauspvm',
+                'vuokraus.palautuspvm',
+                'tuote.nimi as tuote',
+                'tuote.kuva'
+            )
+            ->paginate(3); // Sivutetaan 3 tulosta per sivu
 
-    return view('vuokraus.vuokralla', compact('vuokraukset'));
-}
-
+        return view('vuokraus.vuokralla', compact('vuokraukset'));
+    }
 }

@@ -11,13 +11,13 @@
         <div class="container  mx-auto px-4 py-6 flex justify-between items-center">
             <!-- Logo tai Sivun Nimi -->
             <a href="{{ url('/') }}" class="text-lg font-bold text-black">
-                Vuokraamo
+                Eezy Renting
             </a>
 
             <!-- Navigointi -->
             <nav class="flex space-x-8">
                 <a href="{{ url('/asiakas') }}" class="text-gray-700 hover:text-blue-500">Asiakas</a>
-                <a href="{{ url('/tuote') }}" class="text-gray-700 hover:text-blue-500">Tuote</a>
+                <a href="{{ url('/tuote') }}" class="text-gray-700 hover:text-blue-500">Autot</a>
                 <a href="{{ url('/myyja') }}" class="text-gray-700 hover:text-blue-500">Myyjä</a>
                 <a href="{{ url('/vuokraus') }}" class="text-gray-700 hover:text-blue-500">Vuokraus</a>
             </nav>
