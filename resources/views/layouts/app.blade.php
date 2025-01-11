@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Vuokraamo')</title>
     @vite('resources/css/app.css') <!-- Tailwind CSS -->
+    <style>
+        body {
+            background-image: url('/image/jeep1.jpg'); /* Polku taustakuvaan */
+            background-size: cover; /* Kuva kattaa koko alueen */
+            background-position: center; /* Kuva keskitetään */
+            background-repeat: no-repeat; /* Ei toistuva kuva */
+        }
+    </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="relative flex flex-col min-h-screen">
     @include('inc.header')
 
-    <main class="flex-grow container mx-auto py-8">
+    <main class="relative flex-grow container mx-auto py-8 z-10 bg-transparent bg-opacity-60 rounded shadow-lg">
         @yield('content')
     </main>
 

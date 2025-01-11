@@ -1,4 +1,4 @@
-<footer class="bg-white py-4 mt-8">
+<footer class="bg-black py-4 mt-8 text-white opacity-50">
     <div class="container mx-auto text-center">
         <p>&copy; {{ date('Y') }} Vuokraamo. Kaikki oikeudet pidätetään.</p>
         <div class="flex justify-center mt-4 space-x-4">

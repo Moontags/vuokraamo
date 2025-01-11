@@ -7,7 +7,7 @@
        {{ session('success') }}
     </div>
     @endif
-    <h1 class="text-3xl font-bold mb-6">Myyjät</h1>
+    <h1 class="text-3xl font-bold mb-6  text-white">Myyjät</h1>
     <a href="{{ route('myyja.create') }}" class="bg-blue-400 text-white px-4 py-2 rounded mb-4 inline-block">Lisää uusi myyjä</a>
 
     <table class="min-w-full bg-white border border-gray-300 text-center">

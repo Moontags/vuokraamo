@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tuote;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class TuoteController extends Controller
@@ -14,7 +15,7 @@ class TuoteController extends Controller
      */
     public function index()
     {
-        $tuotes = Tuote::all(); // Määritellään muuttuja $tuotes
+        $tuotes = DB::table('tuote')->paginate(1); // Näytetään 1 tuote per sivu
         return view('tuote.index', compact('tuotes'));
     }
 

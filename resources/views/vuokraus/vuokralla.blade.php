@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-8 mt-24"> <!-- Lisätty "mt-16" siirtämään koko osiota alemmas -->
-    <h1 class="text-3xl font-bold mb-6">Vuokralla olevat tuotteet</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Vuokralla olevat autot</h1>
 
     @if ($vuokraukset->isEmpty())
         <p class="text-gray-600">Ei vuokrauksia tällä hetkellä.</p>

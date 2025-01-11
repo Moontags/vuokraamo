@@ -1,65 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-8">
+<div class="container mx-auto py-8 max-w-3xl">
     @if (session('success'))
-    <div class="bg-green-100 text-green-500 p-4 rounded mb-4">
-       {{ session('success') }}
-    </div>
+        <div class="bg-green-100 text-green-500 p-4 rounded mb-4">
+           {{ session('success') }}
+        </div>
     @endif
-    <h1 class="text-3xl font-bold mb-6">Tuotetiedot</h1>
-    <div class="flex justify-between items-center mb-4">
-        <!-- Lisää tuote -nappi -->
-        <a href="{{ route('tuote.create') }}" class="bg-green-400 text-white px-4 py-2 rounded">Lisää tuote</a>
+    <h1 class="text-3xl font-bold mb-6 text-white text-center">Vuokra automme</h1>
 
-        <!-- Vuokralla olevat -nappi -->
-        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-green-400 text-white px-4 py-2 rounded">Vuokralla olevat</a>
-    </div>
+    @if ($tuotes->count() > 0)
+        <!-- Näytetään yksi tuote keskellä -->
+        <div class="bg-gray-100 shadow-lg rounded p-6 text-center">
+            <img src="{{ Storage::url($tuotes[0]->kuva) }}" alt="{{ $tuotes[0]->nimi }}" class="w-4/5 h-64 object-contain rounded mb-4 mx-auto">
+            <h3 class="text-2xl font-bold">{{ $tuotes[0]->nimi }}</h3>
+            <p class="text-gray-600">{{ $tuotes[0]->kuvaus }}</p>
+            <p class="text-lg font-semibold mt-2">{{ number_format($tuotes[0]->hinta, 2) }} € / Vuorokausi</p>
 
-    <table class="min-w-full bg-white border border-gray-100 text-center">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="border border-gray-300 px-4 py-2">Nimi</th>
-                <th class="border border-gray-300 px-4 py-2">Kpl</th>
-                <th class="border border-gray-300 px-4 py-2">Kuva</th>
-                <th class="border border-gray-300 px-4 py-2">Hinta</th>
-                <th class="border border-gray-300 px-4 py-2">Toiminnot</th>
-            </tr>
-        </thead>
+            <!-- Toimintonapit -->
+            <div class="mt-4 flex justify-between items-center">
+                <!-- Vasemmalle jäävät napit -->
+                <div class="flex space-x-4">
+                    <a href="{{ route('tuote.show', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Katso</a>
+                    <a href="{{ route('tuote.edit', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Päivitä</a>
+                    <form action="{{ route('tuote.destroy', ['tuote' => $tuotes[0]->tuoteID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">Poista</button>
+                    </form>
+                </div>
 
-        <tbody>
-            @foreach ($tuotes as $tuote)
-                <tr>
-                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->nimi }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $tuote->kpl }}</td>
-                    <td class="border border-gray-300 px-4 py-2">
-                        @if ($tuote->kuva)
-                            <img src="{{ Storage::url($tuote->kuva) }}" alt="Tuotekuva" class="w-12 h-12 object-cover rounded">
-                        @else
-                            Ei kuvaa
-                        @endif
-                    </td>
-                    <td class="border border-gray-300 px-4 py-2">{{ number_format($tuote->hinta, 2) }} €</td>
-                    <td class="border border-gray-300 px-4 py-2">
-                        <!-- Toimintonapit -->
-                        <div class="flex justify-center space-x-2">
-                            <!-- Katso-nappi -->
-                            <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}" class="bg-blue-400 text-white px-3 py-1 rounded">Katso</a>
+                <!-- Vuokraa-nappi oikealle -->
+                <a href="{{ route('vuokraus.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400">
+                    Vuokraa tuote
+                </a>
+            </div>
+        </div>
 
-                            <!-- Päivitä-nappi -->
-                            <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}" class="bg-yellow-400 text-white px-3 py-1 rounded">Päivitä</a>
+        <!-- Pagination nuolilla -->
+        <div class="flex justify-between items-center mt-8">
+            <!-- Edellinen -->
+            @if ($tuotes->onFirstPage())
+                <button class="bg-gray-700 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
+                    <i class="bi bi-arrow-left"></i> Edellinen
+                </button>
+            @else
+                <a href="{{ $tuotes->previousPageUrl() }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">
+                    <i class="bi bi-arrow-left"></i> Edellinen
+                </a>
+            @endif
 
-                            <!-- Poista-nappi -->
-                            <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Poista</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+            <!-- Seuraava -->
+            @if ($tuotes->hasMorePages())
+                <a href="{{ $tuotes->nextPageUrl() }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">
+                    Seuraava <i class="bi bi-arrow-right"></i>
+                </a>
+            @else
+                <button class="bg-gray-700 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
+                    Seuraava <i class="bi bi-arrow-right"></i>
+                </button>
+            @endif
+        </div>
+    @else
+        <p class="text-white text-center">Ei tuotteita saatavilla.</p>
+    @endif
 </div>
 @endsection

@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
-    <header class="bg-white shadow-sm">
+    <header class="bg-black shadow-sm opacity-50">
         <div class="container  mx-auto px-4 py-6 flex justify-between items-center">
             <!-- Logo tai Sivun Nimi -->
-            <a href="{{ url('/') }}" class="text-lg font-bold text-black">
+            <a href="{{ url('/') }}" class="text-lg font-bold text-white">
                 Eezy Renting
             </a>
 
             <!-- Navigointi -->
             <nav class="flex space-x-8">
-                <a href="{{ url('/asiakas') }}" class="text-gray-700 hover:text-blue-500">Asiakas</a>
-                <a href="{{ url('/tuote') }}" class="text-gray-700 hover:text-blue-500">Autot</a>
-                <a href="{{ url('/myyja') }}" class="text-gray-700 hover:text-blue-500">Myyjä</a>
-                <a href="{{ url('/vuokraus') }}" class="text-gray-700 hover:text-blue-500">Vuokraus</a>
+                <a href="{{ url('/asiakas') }}" class="text-white hover:text-blue-500">Asiakas</a>
+                <a href="{{ url('/tuote') }}" class="text-white hover:text-blue-500">Automme</a>
+                <a href="{{ url('/myyja') }}" class="text-white hover:text-blue-500">Myyjä</a>
+                <a href="{{ url('/vuokraus') }}" class="text-white hover:text-blue-500">Vuokraus</a>
             </nav>
 
             <!-- Haku ja Kirjautuminen -->
@@ -43,14 +43,14 @@
                     <!-- Jos käyttäjä on kirjautunut -->
                     <form action="{{ route('ulos') }}" method="POST" class="inline">
                         @csrf
-                        <button type="submit" class="text-gray-700 hover:text-red-500 flex items-center">
+                        <button type="submit" class="text-white hover:text-red-500 flex items-center">
                             <i class="bi bi-box-arrow-right text-lg"></i>
                             <span class="ml-1">Ulos</span>
                         </button>
                     </form>
                 @else
                     <!-- Jos käyttäjä ei ole kirjautunut -->
-                    <a href="{{ url('/kirjaudu') }}" class="text-gray-700 hover:text-blue-500 flex items-center">
+                    <a href="{{ url('/kirjaudu') }}" class="text-white hover:text-blue-500 flex items-center">
                         <i class="bi bi-box-arrow-in-right text-lg"></i>
                         <span class="ml-1">Kirjaudu</span>
                     </a>

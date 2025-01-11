@@ -6,14 +6,14 @@
     <title>Lisää uusi asiakas</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
+<body">
     @include('inc.header')
 
-    <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold mb-6">Lisää uusi asiakas</h1>
+    <div class="container mx-auto py-8 mb-0 max-w-4xl">
+        <h1 class="text-2xl font-bold mb-2">Lisää uusi asiakas</h1>
 
         @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+            <div class="bg-red-100 text-red-700 p-4 rounded mb-2">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

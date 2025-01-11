@@ -9,7 +9,8 @@
 <body class="bg-gray-100 flex flex-col min-h-screen">
     @include('inc.header')
 
-    <div class="container mx-auto py-8 flex-grow">
+    <!-- Pääsisältö -->
+    <div class="container mx-auto py-8 flex-grow max-w-4xl mb-0">
         <h1 class="text-3xl font-bold mb-6">Muokkaa asiakasta</h1>
 
         @if ($errors->any())
@@ -66,8 +67,9 @@
         </form>
     </div>
 
-    <footer class="bg-white shadow mt-auto">
-        <div class="container mx-auto py-4 text-center text-gray-600">
+    <!-- Footer -->
+    <footer class="bg-black text-white text-center py-4 mt-auto opacity-50">
+        <div class="container mx-auto">
             &copy; {{ date('Y') }} Vuokraamo. Kaikki oikeudet pidätetään.
         </div>
     </footer>
