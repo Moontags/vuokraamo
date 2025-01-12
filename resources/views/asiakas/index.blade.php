@@ -17,7 +17,7 @@
 <body class="flex flex-col min-h-screen">
     @include('inc.header')
 
-    <div class="container mx-auto py-8 flex-grow mt-8 bg-white text-black rounded shadow-md p-10">
+    <div class="container mx-auto py-8 flex-grow mt-8 bg-gray-800 text-white rounded shadow-md p-10">
         @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
            {{ session('success') }}
@@ -28,28 +28,28 @@
 
         <a href="{{ route('asiakas.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-blue-600">Lisää asiakas</a>
 
-        <table class="min-w-full border border-gray-300 text-center text-black">
-            <thead class="bg-gray-100">
+        <table class="min-w-full bg-gray-700 text-center text-white border border-gray-600">
+            <thead class="bg-gray-900">
                 <tr>
-                    <th class="border border-gray-300 px-4 py-2">ID</th>
-                    <th class="border border-gray-300 px-4 py-2">Etunimi</th>
-                    <th class="border border-gray-300 px-4 py-2">Sukunimi</th>
-                    <th class="border border-gray-300 px-4 py-2">Sähköposti</th>
-                    <th class="border border-gray-300 px-4 py-2">Toiminnot</th>
+                    <th class="border border-gray-600 px-4 py-2">ID</th>
+                    <th class="border border-gray-600 px-4 py-2">Etunimi</th>
+                    <th class="border border-gray-600 px-4 py-2">Sukunimi</th>
+                    <th class="border border-gray-600 px-4 py-2">Sähköposti</th>
+                    <th class="border border-gray-600 px-4 py-2">Toiminnot</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($asiakkaat as $asiakas)
-                    <tr class="hover:bg-gray-50">
-                        <td class="border border-gray-300 px-4 py-2">{{ $asiakas->id }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $asiakas->etunimi }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $asiakas->sukunimi }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $asiakas->sahkoposti }}</td>
-                        <td class="border border-gray-300 px-4 py-2">
+                    <tr class="hover:bg-gray-600">
+                        <td class="border border-gray-600 px-4 py-2">{{ $asiakas->id }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ $asiakas->etunimi }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ $asiakas->sukunimi }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ $asiakas->sahkoposti }}</td>
+                        <td class="border border-gray-600 px-4 py-2">
                             <div class="flex justify-center space-x-2">
                                 <!-- Näytä-nappi -->
                                 <a href="{{ route('asiakas.show', $asiakas->id) }}"
-                                   class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600">Näytä</a>
+                                   class="bg-gray-900 text-white px-3 py-1 rounded hover:bg-gray-700">Näytä</a>
 
                                 <!-- Muokkaa-nappi -->
                                 <a href="{{ route('asiakas.edit', $asiakas->id) }}"

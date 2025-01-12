@@ -27,16 +27,22 @@ class VuokrausController extends Controller
 // Removed duplicate method
 
 
-    public function create()
-    {
-        $asiakkaat = DB::table('asiakas')
-            ->select('id', DB::raw("CONCAT(etunimi, ' ', sukunimi) AS nimi"))
-            ->get();
+public function create(Request $request, $tuoteID = null)
+{
+    $asiakkaat = DB::table('asiakas')
+        ->select('id', DB::raw("CONCAT(etunimi, ' ', sukunimi) AS nimi"))
+        ->get();
 
-        $tuotteet = DB::table('tuote')->select('tuoteID as id', 'nimi')->get();
-
-        return view('vuokraus.create', compact('asiakkaat', 'tuotteet'));
+    // Tarkistetaan, onko `tuoteID` lähetetty
+    $tuote = null;
+    if ($tuoteID) {
+        $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
     }
+
+
+    return view('vuokraus.create', compact('asiakkaat', 'tuote'));
+}
+
 
     public function store(Request $request)
     {
@@ -71,6 +77,7 @@ class VuokrausController extends Controller
         });
 
         return redirect()->route('vuokraus.index')->with('success', 'Vuokraus tallennettu onnistuneesti!');
+
     }
     public function vuokralla()
     {

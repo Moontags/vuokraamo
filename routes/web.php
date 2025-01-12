@@ -32,6 +32,8 @@ Route::get('/vuokraus', [VuokrausController::class, 'index'])->name('vuokraus.in
 Route::get('/vuokraus/create', [VuokrausController::class, 'create'])->name('vuokraus.create');
 Route::post('/vuokraus', [VuokrausController::class, 'store'])->name('vuokraus.store');
 Route::get('/vuokralla', [VuokrausController::class, 'vuokralla'])->name('vuokraus.vuokralla');
+Route::get('/vuokraus/create/{tuoteID?}', [VuokrausController::class, 'create'])->name('vuokraus.create');
+
 
 // Kirjautumislomake
 Route::get('/kirjaudu', [AuthController::class, 'loginForm'])->name('kirjaudu');

@@ -11,17 +11,17 @@
 
     @if ($tuotes->count() > 0)
         <!-- Näytetään yksi tuote keskellä -->
-        <div class="bg-white bg-opacity-95 shadow-lg rounded p-6 text-center">
+        <div class="bg-white bg-opacity-0 shadow-lg rounded p-6 text-center">
             <img src="{{ Storage::url($tuotes[0]->kuva) }}" alt="{{ $tuotes[0]->nimi }}" class="w-full h-80 object-contain rounded mb-6 mx-auto">
 
-            <h3 class="text-2xl font-bold mb-4 drop-shadow-lg">{{ $tuotes[0]->nimi }}</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white drop-shadow-lg">{{ $tuotes[0]->nimi }}</h3>
 
-            <p class="mb-4 drop-shadow-sm">{{ $tuotes[0]->kuvaus }}</p>
+            <p class="mb-4 text-white drop-shadow-sm">{{ $tuotes[0]->kuvaus }}</p>
 
             <!-- Flex-asettelu hinnalle ja napille -->
             <div class="flex justify-end items-center space-x-4 mt-4">
                 <!-- Hinta -->
-                <div class="text-lg font-semibold drop-shadow-lg mr-12">
+                <div class="text-lg font-semibold text-white drop-shadow-lg mr-12">
                     {{ number_format($tuotes[0]->hinta, 2) }} € / Vuorokausi
                 </div>
                 <!-- Vuokraa-nappi -->
