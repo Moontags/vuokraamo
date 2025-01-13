@@ -3,7 +3,7 @@
 @section('title', 'Kirjaudu sisään')
 
 @section('content')
-<main class="flex-grow flex justify-center items-center">
+<main class="flex-grow flex justify-center items-center mt-24">
     <div class="p-8 rounded shadow-sm w-96 bg-white bg-opacity-90">
         <h2 class="text-2xl font-bold mb-4 text-center">Kirjaudu sisään</h2>
 
@@ -33,7 +33,7 @@
                 <input type="password" name="salasana" id="salasana" class="w-full border border-gray-300 px-4 py-2 rounded" required>
             </div>
 
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded w-full">Kirjaudu</button>
+            <button type="submit" class="bg-gray-500 text-white px-3 py-2 w-full rounded hover:bg-gray-400">Kirjaudu</button>
         </form>
     </div>
 </main>

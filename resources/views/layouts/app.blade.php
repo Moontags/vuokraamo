@@ -7,7 +7,7 @@
     @vite('resources/css/app.css') <!-- Tailwind CSS -->
     <style>
         body {
-            background-image: url('/image/liitu.jpg'); /* Polku taustakuvaan */
+            background-image: url('/image/dark.jpg'); /* Polku taustakuvaan */
             background-size: cover; /* Kuva kattaa koko alueen */
             background-position: center; /* Kuva keskitetään */
             background-repeat: no-repeat; /* Ei toistuva kuva */

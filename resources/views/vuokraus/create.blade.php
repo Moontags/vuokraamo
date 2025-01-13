@@ -49,7 +49,8 @@
 
             <!-- Tallenna-painike -->
             <div class="mt-4 text-center">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-400 w-full mt-7">Vahvista vuokraus</button>
+                <!-- Muokattu napin hover-tila -->
+                <button type="submit" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-full mt-7">Vahvista vuokraus</button>
             </div>
         </div>
     </form>

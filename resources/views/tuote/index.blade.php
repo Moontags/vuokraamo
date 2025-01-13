@@ -26,7 +26,7 @@
                 </div>
                 <!-- Vuokraa-nappi -->
                 <div>
-                    <a href="{{ route('vuokraus.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-400 mx-14 shadow-md">
+                    <a href="{{ route('vuokraus.create', ['tuoteID' => $tuotes[0]->tuoteID]) }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400 mx-14 shadow-md">
                         Vuokraa
                     </a>
                 </div>
@@ -37,33 +37,33 @@
         <div class="flex justify-between items-center mt-8">
             <!-- Edellinen -->
             @if ($tuotes->onFirstPage())
-                <button class="bg-gray-700 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
+                <button class="bg-gray-500 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </button>
             @else
-                <a href="{{ $tuotes->previousPageUrl() }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">
+                <a href="{{ $tuotes->previousPageUrl() }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </a>
             @endif
 
             <!-- Katso, Päivitä ja Poista napit -->
             <div class="flex justify-center space-x-4">
-                <a href="{{ route('tuote.show', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Katso</a>
-                <a href="{{ route('tuote.edit', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Päivitä</a>
+                <a href="{{ route('tuote.show', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">Katso</a>
+                <a href="{{ route('tuote.edit', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">Päivitä</a>
                 <form action="{{ route('tuote.destroy', ['tuote' => $tuotes[0]->tuoteID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">Poista</button>
+                    <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">Poista</button>
                 </form>
             </div>
 
             <!-- Seuraava -->
             @if ($tuotes->hasMorePages())
-                <a href="{{ $tuotes->nextPageUrl() }}" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">
+                <a href="{{ $tuotes->nextPageUrl() }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </a>
             @else
-                <button class="bg-gray-700 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
+                <button class="bg-gray-500 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </button>
             @endif

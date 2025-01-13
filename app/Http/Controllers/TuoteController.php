@@ -7,7 +7,6 @@ use App\Models\Tuote;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
-
 class TuoteController extends Controller
 {
     /**
@@ -37,15 +36,12 @@ class TuoteController extends Controller
             'nimi' => 'required|string|max:255',
             'kuvaus' => 'required|string',
             'kpl' => 'required|integer|min:1|max:20',
-            'hinta' => 'required|integer|min:5|max:300',
+            'hinta' => 'required|numeric|min:5|max:300',
             'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Tallenna tiedoston nimi, jos kuva on ladattu
-        $kuvaPolku = null;
-        if ($request->hasFile('kuva')) {
-            $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
-        }
+        $kuvaPolku = $request->hasFile('kuva') ? $request->file('kuva')->store('tuotekuvat', 'public') : null;
 
         // Luo uusi tuote
         Tuote::create([
@@ -56,7 +52,7 @@ class TuoteController extends Controller
             'kuva' => $kuvaPolku,
         ]);
 
-        // Ohjaa takaisin tuotteiden listaukseen
+        // Palauta onnistumisviesti
         return redirect()->route('tuote.index')->with('success', 'Tuote lisätty onnistuneesti!');
     }
 
@@ -74,67 +70,58 @@ class TuoteController extends Controller
      */
     public function edit(string $id)
     {
-        $tuote = Tuote::where('tuoteID', $id)->firstOrFail();
+        $tuote = Tuote::findOrFail($id);
         return view('tuote.edit', compact('tuote'));
     }
-
 
     /**
      * Update the specified resource in storage.
      */
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'nimi' => 'required|string|max:255',
+            'kuvaus' => 'required|string',
+            'kpl' => 'required|integer|min:1|max:20',
+            'hinta' => 'required|numeric|min:5|max:300',
+            'kategoria' => 'required|string|max:255',
+            'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-     public function update(Request $request, $id)
-     {
-         $request->validate([
-             'nimi' => 'required|string|max:255',
-             'kuvaus' => 'required|string',
-             'kpl' => 'required|integer|min:1',
-             'hinta' => 'required|numeric|min:0',
-             'kategoria' => 'required|string|max:255',
-             'kuva' => 'nullable|image|max:2048', // Max 2 MB
-         ]);
+        $tuote = Tuote::findOrFail($id);
 
-         $tuote = Tuote::findOrFail($id);
-
-         if ($request->hasFile('kuva')) {
-             // Poista vanha kuva, jos sellainen on
-             if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
-                 Storage::delete('public/' . $tuote->kuva);
-             }
-
-             // Tallenna uusi kuva
-             $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
-             $tuote->kuva = $kuvaPolku;
-         }
-
-         $tuote->update([
-             'nimi' => $request->input('nimi'),
-             'kuvaus' => $request->input('kuvaus'),
-             'kpl' => $request->input('kpl'),
-             'hinta' => $request->input('hinta'),
-             'kategoria' => $request->input('kategoria'),
-         ]);
-
-         return redirect()->route('tuote.index')->with('success', 'Tuote päivitetty onnistuneesti!');
-     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-
-        public function destroy(string $id)
-        {
-            $tuote = Tuote::findOrFail($id);
-
-            // Poistetaan kuva, jos se on olemassa
+        // Käsitellään kuvan päivitys
+        if ($request->hasFile('kuva')) {
             if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
                 Storage::delete('public/' . $tuote->kuva);
             }
 
-            // Poistetaan tuote tietokannasta
-            $tuote->delete();
-
-            // Ohjaa takaisin tuotteiden listaukseen
-            return redirect()->route('tuote.index')->with('success', 'Tuote poistettu onnistuneesti!');
+            $tuote->kuva = $request->file('kuva')->store('tuotekuvat', 'public');
         }
+
+        // Päivitä muut tiedot
+        $tuote->update($request->only(['nimi', 'kuvaus', 'kpl', 'hinta', 'kategoria']));
+
+        // Palauta onnistumisviesti
+        return redirect()->route('tuote.index')->with('success', 'Tuote päivitetty onnistuneesti!');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $tuote = Tuote::findOrFail($id);
+
+        // Poistetaan kuva, jos se on olemassa
+        if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
+            Storage::delete('public/' . $tuote->kuva);
+        }
+
+        // Poistetaan tuote tietokannasta
+        $tuote->delete();
+
+        // Palauta onnistumisviesti
+        return redirect()->route('tuote.index')->with('success', 'Tuote poistettu onnistuneesti!');
+    }
+}

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mx-auto py-8 flex-grow max-w-4xl" >
-    <h1 class="text-3xl font-bold mb-6">Muokkaa myyjää</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Muokkaa myyjää</h1>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
@@ -34,7 +34,7 @@
             <input type="text" name="rooli" id="rooli" value="{{ old('rooli', $myyja->rooli) }}" class="w-full border border-gray-300 px-4 py-2 rounded" required>
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Tallenna muutokset</button>
+        <button type="submit" class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-400">Tallenna muutokset</button>
         <a href="{{ route('myyja.index') }}" class="text-gray-500 ml-4">Peruuta</a>
     </form>
 </div>

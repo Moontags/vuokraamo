@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-8 mt-24"> <!-- Lisätty "mt-16" siirtämään koko osiota alemmas -->
+<div class="container mx-auto py-8 mt-8">
     <h1 class="text-3xl font-bold mb-6 text-white">Vuokralla olevat autot</h1>
 
     @if ($vuokraukset->isEmpty())
@@ -11,7 +11,10 @@
             @foreach ($vuokraukset as $vuokraus)
             <div class="rounded shadow-lg overflow-hidden">
                 <div class="p-4">
-                    <img src="{{ asset('storage/' . $vuokraus->kuva) }}" alt="{{ $vuokraus->tuote }}" class="w-full h-40 object-cover rounded mb-4">
+                    <!-- Päivitetty kuvan koko vastaamaan index-sivua -->
+                    <img src="{{ asset('storage/' . $vuokraus->kuva) }}" alt="{{ $vuokraus->tuote }}"
+                        class="w-full h-64 object-cover rounded mb-4">
+
                     <h3 class="text-lg font-bold text-white">{{ $vuokraus->tuote }}</h3>
                     <p class="text-white">Vuokraus ID: {{ $vuokraus->id }}</p>
                     <p class="text-white">Asiakas: {{ $vuokraus->asiakas }}</p>
