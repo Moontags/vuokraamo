@@ -7,17 +7,20 @@
     <form action="{{ route('vuokraus.store') }}" method="POST" class="flex flex-wrap lg:flex-nowrap gap-6 items-start">
         @csrf
         <!-- Vasemman puolen sisältö: Auto -->
-        <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col justify-between">
+        <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col items-center mt-4">
             @if ($tuote)
-                <div>
+                <!-- Kuva -->
+                <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-64 object-contain rounded mb-4">
+                <input type="hidden" name="tuotteet[]" value="{{ $tuote->tuoteID }}">
+
+                <!-- Auton tiedot -->
+                <div class="text-center">
                     <h3 class="text-xl font-bold mb-2 text-white">{{ $tuote->nimi }}</h3>
                     <p class="text-gray-100">{{ $tuote->kuvaus }}</p>
                     <p class="text-lg font-bold mt-2 text-white">{{ number_format($tuote->hinta, 2) }} € / Vuorokausi</p>
                 </div>
-                <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-64 object-contain rounded mt-4">
-                <input type="hidden" name="tuotteet[]" value="{{ $tuote->tuoteID }}">
             @else
-                <p class="text-red-500">Valittua autoa ei löytynyt. Valitse auto ensin.</p>
+                <p class="text-red-500 text-center">Valittua autoa ei löytynyt. Valitse auto ensin.</p>
             @endif
         </div>
 
