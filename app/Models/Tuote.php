@@ -17,5 +17,6 @@ class Tuote extends Model
         'kpl',
         'hinta',
         'kuva',
+        'kategoria',
     ];
 }

@@ -23,6 +23,8 @@ Route::resource('tuote', TuoteController::class);
 Route::get('tuote/{tuote}/edit', [TuoteController::class, 'edit'])->name('tuote.edit');
 Route::get('/tuote/create', [TuoteController::class, 'create'])->name('tuote.create');
 Route::post('/tuote', [TuoteController::class, 'store'])->name('tuote.store');
+Route::put('/tuote/{tuote}', [TuoteController::class, 'update'])->name('tuote.update');
+
 
 // Myyjä
 Route::resource('myyja', MyyjaController::class);
