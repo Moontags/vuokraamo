@@ -7,7 +7,14 @@
            {{ session('success') }}
         </div>
     @endif
-    <h1 class="text-3xl font-bold mb-6 text-white text-center">Vuokra automme</h1>
+
+    <!-- Otsikko ja "Lisää tuote" -nappi -->
+    <div class="">
+        <a href="{{ route('tuote.create') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-3 rounded">
+            Lisää tuote
+        </a>
+        <h1 class="text-3xl font-bold text-white text-center flex-grow">Vuokra automme</h1>
+    </div>
 
     @if ($tuotes->count() > 0)
         <!-- Näytetään yksi tuote keskellä -->
