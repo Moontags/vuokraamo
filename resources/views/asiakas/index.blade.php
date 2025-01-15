@@ -35,7 +35,7 @@
                         <div class="flex justify-center space-x-2">
                             <!-- Näytä-nappi -->
                             <a href="{{ route('asiakas.show', $asiakas->id) }}"
-                               class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600">Näytä</a>
+                               class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Näytä</a>
 
                             <!-- Muokkaa-nappi -->
                             <a href="{{ route('asiakas.edit', $asiakas->id) }}"

@@ -3,7 +3,7 @@
 @section('title', 'Lisää uusi asiakas')
 
 @section('content')
-<div class="container mx-auto py-8 mb-0 max-w-4xl bg-white bg-opacity-90 rounded p-8 max-h-[70vh] overflow-auto">
+<div class="container mx-auto py-8 mb-0 max-w-4xl bg-white bg-opacity-90 rounded p-8 max-h-[100vh] overflow-auto">
     <h1 class="text-2xl font-bold mb-2">Lisää uusi asiakas</h1>
 
     @if ($errors->any())
