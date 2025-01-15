@@ -1,8 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-8 max-w-4xl">
+<div class="container mx-auto py-8 max-w-4xl relative">
+    <!-- Vuokralla olevat -nappi -->
+    <div class="absolute top-0 right-0 mt-4 mr-4">
+        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400 shadow-md">
+            Vuokralla olevat autot
+        </a>
+    </div>
+
     <h1 class="text-3xl font-bold mb-6 text-white text-center">Luo uusi vuokraus</h1>
+
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
 
     <form action="{{ route('vuokraus.store') }}" method="POST" class="flex flex-wrap lg:flex-nowrap gap-6 items-start">
         @csrf

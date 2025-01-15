@@ -44,41 +44,44 @@ public function create(Request $request, $tuoteID = null)
 }
 
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'asiakasID' => 'required|exists:asiakas,id',
-            'vuokrauspvm' => 'required|date',
-            'palautuspvm' => 'nullable|date|after_or_equal:vuokrauspvm',
-            'tuotteet' => 'required|array',
-            'tuotteet.*' => 'exists:tuote,tuoteID',
+public function store(Request $request)
+{
+    $request->validate([
+        'asiakasID' => 'required|exists:asiakas,id',
+        'vuokrauspvm' => 'required|date',
+        'palautuspvm' => 'nullable|date|after_or_equal:vuokrauspvm',
+        'tuotteet' => 'required|array',
+        'tuotteet.*' => 'exists:tuote,tuoteID',
+    ]);
+
+    DB::transaction(function () use ($request) {
+        $vuokrausID = DB::table('vuokraus')->insertGetId([
+            'asiakasID' => $request->asiakasID,
+            'vuokrauspvm' => $request->vuokrauspvm,
+            'palautuspvm' => $request->palautuspvm,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        DB::transaction(function () use ($request) {
-            $vuokrausID = DB::table('vuokraus')->insertGetId([
-                'asiakasID' => $request->asiakasID,
-                'vuokrauspvm' => $request->vuokrauspvm,
-                'palautuspvm' => $request->palautuspvm,
+        foreach ($request->tuotteet as $tuoteID) {
+            DB::table('vuokrausrivi')->insert([
+                'vuokrausID' => $vuokrausID,
+                'tuoteID' => $tuoteID,
+                'alkamisaika' => $request->vuokrauspvm,
+                'paattymisaika' => $request->palautuspvm,
+                'palautettu' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+        }
+    });
 
-            foreach ($request->tuotteet as $tuoteID) {
-                DB::table('vuokrausrivi')->insert([
-                    'vuokrausID' => $vuokrausID,
-                    'tuoteID' => $tuoteID,
-                    'alkamisaika' => $request->vuokrauspvm,
-                    'paattymisaika' => $request->palautuspvm,
-                    'palautettu' => 0,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-        });
+    // Lähetetään onnistumisviesti
+    return redirect()
+    ->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]]) // Välitä ensimmäinen tuoteID
+    ->with('success', 'Vuokraus tallennettu onnistuneesti!');
+}
 
-        return redirect()->route('vuokraus.index')->with('success', 'Vuokraus tallennettu onnistuneesti!');
-
-    }
     public function vuokralla()
     {
         $vuokraukset = DB::table('vuokraus')

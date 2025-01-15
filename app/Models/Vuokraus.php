@@ -13,7 +13,7 @@ class Vuokraus extends Model
 
     protected $fillable = [
         'asiakasID',
-        'tuoteID', // Lisää tämä vain, jos se on tarpeen
+        'tuote_id', // Lisää tämä vain, jos se on tarpeen
         'vuokrauspvm',
         'palautuspvm',
         'created_at',

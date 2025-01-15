@@ -70,11 +70,11 @@
                     @else
                         <p class="text-gray-600">Ei kuvaa saatavilla.</p>
                     @endif
-                    <label for="kuva" class="block text-gray-700 font-bold mt-4">Uusi kuva:</label>
+                    <label for="kuva" class="block text-gray-700 font-bold mt-5">Uusi kuva:</label>
                     <input type="file" name="kuva" id="kuva" class="w-full border border-gray-300 px-4 py-2 rounded mt-10">
                 </div>
                 <div class="mt-4 self-stretch flex justify-end">
-                    <button type="submit" class="bg-gray-500 text-white px-4 py-1.5 rounded hover:bg-gray-400 mt-8">
+                    <button type="submit" class="bg-gray-500 text-white px-4 py-1.5 rounded hover:bg-gray-400 mt-16">
                         Tallenna
                     </button>
                 </div>

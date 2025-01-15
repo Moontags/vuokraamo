@@ -28,7 +28,7 @@
             <h1 class="text-5xl font-bold text-white">Eezy Car Renting</h1>
             <p class="mt-4 text-2xl text-white">Helppoa vuokrausta vaikeisiinkin olosuhteisiin vuodesta 1985</p>
             <div class="mt-6">
-                <a href="{{ route('tuote.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+                <a href="{{ route('vuokraus.index') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded shadow">
                     Vuokraa
                 </a>
             </div>
