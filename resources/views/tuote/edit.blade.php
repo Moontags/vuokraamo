@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <div class="bg-white p-8 rounded shadow-sm w-full max-w-3xl">
+    <div class="bg-white p-8 rounded shadow-sm w-full max-w-3xl mx-4">
         <h2 class="text-2xl font-bold mb-6 text-center">Muokkaa tuotetta</h2>
 
         @if ($errors->any())
@@ -82,4 +82,5 @@
         </form>
     </div>
 </main>
+
 @endsection

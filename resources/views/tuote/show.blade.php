@@ -4,7 +4,7 @@
 
 @section('content')
 <main class="flex-grow flex justify-center items-center">
-    <div class="bg-white p-8 rounded shadow-sm max-w-md w-full">
+    <div class="bg-white p-8 rounded shadow-sm max-w-md w-full mx-4">
         <h2 class="text-2xl font-bold mb-4 text-center">Tuotteen tiedot</h2>
         <div class="mb-4">
             <p class="mb-2"><strong>Nimi:</strong> {{ $tuote->nimi }}</p>

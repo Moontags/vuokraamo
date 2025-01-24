@@ -4,7 +4,7 @@
 
 @section('content')
 <h1 class="text-3xl font-bold mb-6 text-center mt-12 text-white">Asiakkaan tiedot</h1>
-<div class="flex-grow flex justify-center mt-8">
+<div class="flex-grow flex justify-center mt-8 mx-4">
     <div class="container bg-white p-6 rounded shadow-sm max-w-2xl">
         <div>
             <p><strong>ID:</strong> {{ $asiakas->id }}</p>

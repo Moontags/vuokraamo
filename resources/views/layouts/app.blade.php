@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Vuokraamo')</title>
-    @vite('resources/css/app.css') <!-- Tailwind CSS -->
+    @vite('resources/css/app.css')
     <style>
         body {
-            background-image: url('/image/dark.jpg'); /* Polku taustakuvaan */
-            background-size: cover; /* Kuva kattaa koko alueen */
-            background-position: center; /* Kuva keskitetään */
-            background-repeat: no-repeat; /* Ei toistuva kuva */
+            background-image: url('/image/dark.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -21,7 +21,16 @@
         @yield('content')
     </main>
 
-    @include('inc.footer')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 2000);
+            }
+        });
+    </script>
     <script src="{{ asset('js/main.js') }}"></script>
 
 </body>

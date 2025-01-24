@@ -3,24 +3,21 @@
 @section('title', 'Muokkaa asiakasta')
 
 @section('content')
-<div class="container mx-auto py-8 flex-grow max-w-4xl bg-white bg-opacity-90 rounded shadow-md p-8">
-    <h1 class="text-3xl font-bold mb-6">Muokkaa asiakkaan tietoja</h1>
+<div class="container mx-auto py-8 flex-grow max-w-4xl bg-white bg-opacity-90 rounded shadow-md p-4 sm:p-8">
+    <h1 class="text-3xl font-bold mb-6">Muokkaa asiakastietoja</h1>
 
-    <!-- Onnistumisviesti -->
     @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
             <span>{{ session('success') }}</span>
         </div>
     @endif
 
-    <!-- Informatiivinen viesti -->
     @if (session('info'))
         <div class="bg-blue-100 text-blue-700 p-4 rounded mb-4">
             <span>{{ session('info') }}</span>
         </div>
     @endif
-
-    <!-- Virheilmoitukset -->
+>
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
             <ul>
@@ -31,7 +28,6 @@
         </div>
     @endif
 
-    <!-- Lomake asiakkaan tietojen muokkaamiseen -->
     <form action="{{ route('asiakas.update', $asiakas->id) }}" method="POST">
         @csrf
         @method('PUT')

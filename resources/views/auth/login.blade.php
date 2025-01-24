@@ -3,7 +3,7 @@
 @section('title', 'Kirjaudu sisään')
 
 @section('content')
-<main class="flex-grow flex justify-center items-center mt-24">
+<main class="flex-grow flex justify-center items-bottom mt-36">
     <div class="p-8 rounded shadow-sm w-96 bg-white bg-opacity-90">
         <h2 class="text-2xl font-bold mb-4 text-center">Kirjaudu sisään</h2>
 

@@ -3,7 +3,7 @@
 @section('title', 'Muokkaa myyjää')
 
 @section('content')
-<div class="container mx-auto py-8 flex-grow max-w-4xl" >
+<div class="container mx-auto py-8 flex-grow max-w-4xl px-4" >
     <h1 class="text-3xl font-bold mb-6 text-white">Muokkaa myyjää</h1>
 
     @if ($errors->any())

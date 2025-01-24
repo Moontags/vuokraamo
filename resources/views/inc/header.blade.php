@@ -5,26 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vuokraamo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-gray-100">
     <header class="bg-black shadow-sm bg-opacity-50">
-        <div class="container  mx-auto px-4 py-6 flex justify-between items-center">
-            <!-- Logo tai Sivun Nimi -->
+        <div class="container mx-auto px-4 py-6 flex items-center justify-between">
+            <!-- Logo -->
             <a href="{{ url('/') }}" class="text-lg font-bold text-white">
-                Eezy Renting
+                RentXpress
             </a>
 
+            <!-- Hamburger Menu (mobiilissa) -->
+            <button id="mobile-menu-button" class="text-white md:hidden">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+
             <!-- Navigointi -->
-            <nav class="flex space-x-8">
-                <a href="{{ url('/asiakas') }}" class="text-white hover:text-blue-500">Asiakas</a>
-                <a href="{{ url('/tuote') }}" class="text-white hover:text-blue-500">Automme</a>
-                <a href="{{ url('/myyja') }}" class="text-white hover:text-blue-500">Myyjä</a>
-                <a href="{{ url('/vuokraus') }}" class="text-white hover:text-blue-500">Vuokraus</a>
+            <nav
+                id="mobile-menu"
+                class="hidden md:flex md:space-x-8 absolute md:relative top-full left-0 w-full bg-black md:bg-transparent md:w-auto flex-col md:flex-row md:items-center"
+            >
+                <a href="{{ url('/asiakas') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Asiakas</a>
+                <a href="{{ url('/tuote') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Automme</a>
+                <a href="{{ url('/myyja') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Myyjä</a>
+                <a href="{{ url('/vuokraus') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Vuokraus</a>
             </nav>
 
-            <!-- Haku ja Kirjautuminen -->
+
             <div class="flex items-center space-x-4">
-                <form action="#" method="GET" class="relative">
+
+                <form action="#" method="GET" class="hidden md:block relative">
                     <input
                         type="text"
                         placeholder="Haku"
@@ -37,10 +47,7 @@
                         Etsi
                     </button>
                 </form>
-
-                <!-- Tarkista kirjautumistila -->
                 @auth
-                    <!-- Jos käyttäjä on kirjautunut -->
                     <form action="{{ route('ulos') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-white hover:text-red-500 flex items-center">
@@ -49,7 +56,6 @@
                         </button>
                     </form>
                 @else
-                    <!-- Jos käyttäjä ei ole kirjautunut -->
                     <a href="{{ url('/kirjaudu') }}" class="text-white hover:text-blue-500 flex items-center">
                         <i class="bi bi-box-arrow-in-right text-lg"></i>
                         <span class="ml-1">Kirjaudu</span>
@@ -60,12 +66,12 @@
     </header>
 
     <script>
-        setTimeout(() => {
-            const successMessage = document.querySelector('.bg-green-100');
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-        }, 3000); // 3 sekuntia
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-8 mt-8">
-    <h1 class="text-3xl font-bold mb-6 text-white">Vuokralla olevat autot</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white mx-4">Vuokralla olevat autot</h1>
 
     @if ($vuokraukset->isEmpty())
         <p class="text-white">Ei vuokrauksia tällä hetkellä.</p>
@@ -11,7 +11,7 @@
             @foreach ($vuokraukset as $vuokraus)
             <div class="rounded shadow-lg overflow-hidden">
                 <div class="p-4">
-                    <!-- Päivitetty kuvan koko vastaamaan index-sivua -->
+
                     <img src="{{ asset('storage/' . $vuokraus->kuva) }}" alt="{{ $vuokraus->tuote }}"
                         class="w-full h-64 object-cover rounded mb-4">
 
@@ -25,8 +25,7 @@
             @endforeach
         </div>
 
-        <!-- Sivutuksen linkit -->
-        <div class="mt-16 text-white">
+        <div class="mt-16 text-white mx-4">
             {{ $vuokraukset->links() }}
         </div>
     @endif

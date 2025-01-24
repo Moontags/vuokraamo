@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-8 max-w-4xl">
+<div class="container mx-auto py-8 px-4 md:px-8 max-w-4xl">
     <h1 class="text-3xl font-bold mb-6 text-white">Lisää uusi tuote</h1>
 
     @if ($errors->any())

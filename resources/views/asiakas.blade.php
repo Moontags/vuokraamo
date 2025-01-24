@@ -48,6 +48,6 @@
             </tbody>
         </table>
     </div>
-    <script src="resources/css/app.css"></script> <!-- Ensure this points to your Tailwind JS -->
+    <script src="resources/css/app.css"></script>
 </body>
 </html>
