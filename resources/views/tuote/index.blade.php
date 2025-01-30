@@ -12,7 +12,7 @@
     <div class="flex justify-between items-center mb-6 px-4">
         <h1 class="text-3xl font-bold text-white text-center flex-grow">Vuokra automme</h1>
         <a href="{{ route('tuote.create') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded ml-4">
-            Lisää auto
+            Lisää
         </a>
     </div>
 
