@@ -3,18 +3,18 @@
 @section('title', 'Vuokraamo - Asiakkaat')
 
 @section('content')
-<div class="container mx-auto py-8 flex-grow mt-8 bg-white text-black rounded shadow-md p-4 md:p-10">
+<div class="container mx-auto py-8 flex-grow mt-8 text-black rounded shadow-md p-4 md:p-10">
     @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
            {{ session('success') }}
         </div>
     @endif
 
-    <h1 class="text-3xl font-bold mb-6 text-center">Asiakastiedot</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center text-white">Asiakastiedot</h1>
 
     <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-gray-400">Lisää asiakas</a>
 
-    <div class="hidden md:block overflow-x-auto">
+    <div class="hidden md:block overflow-x-auto max-w-5xl mx-auto rounded-md">
         <table class="min-w-full bg-gray-100 text-center text-black border border-gray-300">
             <thead class="bg-gray-300">
                 <tr>

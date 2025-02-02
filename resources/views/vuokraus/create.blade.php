@@ -4,7 +4,7 @@
 <div class="container mx-auto py-8 max-w-4xl relative">
 
     <div class="absolute top-2 left-1/2 transform -translate-x-1/2">
-        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400 shadow-md">
+        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-gray-500 text-white px-4 py-3 rounded hover:bg-gray-400 shadow-md">
             Vuokralla
         </a>
     </div>
