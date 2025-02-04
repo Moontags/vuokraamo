@@ -10,17 +10,15 @@
 <body class="bg-gray-100">
     <header class="bg-black shadow-sm bg-opacity-50">
         <div class="container mx-auto px-4 py-6 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="{{ url('/') }}" class="text-lg font-bold text-white">
+
+            <a href="{{ url('/') }}" class="text-lg font-bold text-white px-6">
                 RentXpress
             </a>
 
-            <!-- Hamburger Menu (mobiilissa) -->
-            <button id="mobile-menu-button" class="text-white md:hidden">
-                <i class="bi bi-list text-2xl"></i>
-            </button>
 
-            <!-- Navigointi -->
+            {{-- <button id="mobile-menu-button" class="text-white md:hidden">
+                <i class="bi bi-list text-2xl"></i>
+            </button> --}}
             <nav
                 id="mobile-menu"
                 class="hidden md:flex md:space-x-8 absolute md:relative top-full left-0 w-full bg-black md:bg-transparent md:w-auto flex-col md:flex-row md:items-center"
@@ -34,7 +32,7 @@
 
             <div class="flex items-center space-x-4">
 
-                <form action="#" method="GET" class="hidden md:block relative">
+                {{-- <form action="#" method="GET" class="hidden md:block relative">
                     <input
                         type="text"
                         placeholder="Haku"
@@ -46,7 +44,7 @@
                     >
                         Etsi
                     </button>
-                </form>
+                </form> --}}
                 @auth
                     <form action="{{ route('ulos') }}" method="POST" class="inline">
                         @csrf
@@ -56,10 +54,10 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ url('/kirjaudu') }}" class="text-white hover:text-blue-500 flex items-center">
+                    {{-- <a href="{{ url('/kirjaudu') }}" class="text-white hover:text-blue-500 flex items-center">
                         <i class="bi bi-box-arrow-in-right text-lg"></i>
                         <span class="ml-1">Kirjaudu</span>
-                    </a>
+                    </a> --}}
                 @endauth
             </div>
         </div>

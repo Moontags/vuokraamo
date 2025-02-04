@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-8 mt-8">
-    <h1 class="text-3xl font-bold mb-6 text-white mx-4">Vuokralla olevat autot</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white mx-10">Vuokralla olevat</h1>
 
     @if ($vuokraukset->isEmpty())
         <p class="text-white">Ei vuokrauksia tällä hetkellä.</p>

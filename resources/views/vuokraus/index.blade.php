@@ -6,9 +6,9 @@
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-3xl font-bold text-white mx-4">Valitse auto</h1>
 
-        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded mx-4">Vuokralla olevat</a>
+        <a href="{{ route('vuokraus.vuokralla') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded mx-6">Vuokralla</a>
     </div>
-    <h2 class="text-2xl text-center font-bold text-white">Uudistettu mallistomme</h2>
+    <h2 class="text-2xl text-center font-bold text-white">Vapaat autot</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 m-8">
         @foreach ($tuotteet as $tuote)
         <div class="rounded shadow-sm p-4 text-center">
