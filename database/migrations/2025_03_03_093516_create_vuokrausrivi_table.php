@@ -11,17 +11,15 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('vuokrausID');
             $table->unsignedBigInteger('tuoteID');
-            $table->integer('maara');
+            $table->date('alkamisaika'); // Lisää tämä
+            $table->date('paattymisaika'); // Lisää tämä
+            $table->integer('maara')->default(1);
             $table->decimal('hinta', 8, 2);
+            $table->boolean('palautettu')->default(0);
             $table->timestamps();
 
             $table->foreign('vuokrausID')->references('id')->on('vuokraus')->onDelete('cascade');
             $table->foreign('tuoteID')->references('tuoteID')->on('tuote')->onDelete('cascade');
         });
-    }
-
-    public function down()
-    {
-        Schema::dropIfExists('vuokrausrivi');
     }
 };

@@ -61,9 +61,9 @@ public function store(Request $request)
         ]);
 
         foreach ($request->tuotteet as $tuoteID) {
-            // Haetaan tuotteen hinta
+
             $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
-            $hinta = $tuote ? $tuote->hinta : 0.00; // Jos hintaa ei löydy, käytetään 0.00
+            $hinta = $tuote ? $tuote->hinta : 0.00;
 
             DB::table('vuokrausrivi')->insert([
                 'vuokrausID' => $vuokrausID,
@@ -71,7 +71,7 @@ public function store(Request $request)
                 'alkamisaika' => $request->vuokrauspvm,
                 'paattymisaika' => $request->palautuspvm,
                 'maara' => $request->input('maara', 1),
-                'hinta' => $hinta,
+                'hinta' => $request->input('hinta', 0.00),
                 'palautettu' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),

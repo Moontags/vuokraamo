@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('postinumero', 5)->nullable();
             $table->string('postitoimipaikka', 100)->nullable();
             $table->string('puhelin', 15)->nullable();
+            $table->string('password')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
