@@ -3,6 +3,6 @@
 if (!function_exists('tarkistaKirjautuminen')) {
     function tarkistaKirjautuminen()
     {
-        return session('kirjautunut', false);
+        return \Illuminate\Support\Facades\Session::get('kirjautunut', false);
     }
 }
