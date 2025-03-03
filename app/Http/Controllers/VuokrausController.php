@@ -9,23 +9,20 @@ class VuokrausController extends Controller
 {
     public function index()
     {
-        // Haetaan vuokraukset (oletetaan, että nämä eivät tarvitse sivutusta)
+
         $vuokraukset = DB::table('vuokraus')
             ->join('asiakas', 'vuokraus.asiakasID', '=', 'asiakas.id')
             ->select('vuokraus.*', DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"))
             ->get();
 
-        // Sivutetaan tuotteet
-        $tuotteet = DB::table('tuote')
-            ->select('tuoteID as id', 'nimi', 'kuvaus', 'kuva') // Oletetaan sarakkeet
-            ->paginate(3); // 3 tuotetta per sivu
 
-        // Palautetaan näkymä
+        $tuotteet = DB::table('tuote')
+            ->select('tuoteID as id', 'nimi', 'kuvaus', 'kuva')
+            ->paginate(3);
+
+
         return view('vuokraus.index', compact('vuokraukset', 'tuotteet'));
     }
-
-// Removed duplicate method
-
 
 public function create(Request $request, $tuoteID = null)
 {
@@ -33,7 +30,7 @@ public function create(Request $request, $tuoteID = null)
         ->select('id', DB::raw("CONCAT(etunimi, ' ', sukunimi) AS nimi"))
         ->get();
 
-    // Tarkistetaan, onko `tuoteID` lähetetty
+
     $tuote = null;
     if ($tuoteID) {
         $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
@@ -64,11 +61,17 @@ public function store(Request $request)
         ]);
 
         foreach ($request->tuotteet as $tuoteID) {
+            // Haetaan tuotteen hinta
+            $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
+            $hinta = $tuote ? $tuote->hinta : 0.00; // Jos hintaa ei löydy, käytetään 0.00
+
             DB::table('vuokrausrivi')->insert([
                 'vuokrausID' => $vuokrausID,
                 'tuoteID' => $tuoteID,
                 'alkamisaika' => $request->vuokrauspvm,
                 'paattymisaika' => $request->palautuspvm,
+                'maara' => $request->input('maara', 1),
+                'hinta' => $hinta,
                 'palautettu' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -76,11 +79,11 @@ public function store(Request $request)
         }
     });
 
-    // Lähetetään onnistumisviesti
     return redirect()
-    ->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]]) // Välitä ensimmäinen tuoteID
-    ->with('success', 'Vuokraus tallennettu onnistuneesti!');
+        ->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]])
+        ->with('success', 'Vuokraus tallennettu onnistuneesti!');
 }
+
 
     public function vuokralla()
     {
@@ -94,9 +97,10 @@ public function store(Request $request)
                 'vuokraus.vuokrauspvm',
                 'vuokraus.palautuspvm',
                 'tuote.nimi as tuote',
-                'tuote.kuva'
+                'tuote.kuva',
+                'vuokrausrivi.maara'
             )
-            ->paginate(3); // Sivutetaan 3 tulosta per sivu
+            ->paginate(3);
 
         return view('vuokraus.vuokralla', compact('vuokraukset'));
     }

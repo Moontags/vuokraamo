@@ -14,7 +14,7 @@
             <div class="mb-4">
                 <p><strong>Kuva:</strong></p>
                 @if ($tuote->kuva)
-                    <img src="{{ asset('storage/' . $tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md">
+                <img src="{{ url('storage/' . $tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md">
                 @else
                     <p class="text-gray-500">Ei kuvaa saatavilla.</p>
                 @endif
