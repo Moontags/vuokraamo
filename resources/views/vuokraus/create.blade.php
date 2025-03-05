@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container mx-auto py-8 max-w-4xl relative">
 
     <div class="absolute top-2 left-1/2 transform -translate-x-1/2">
@@ -37,13 +39,22 @@
         </div>
 
         <div class="w-full lg:w-1/2 p-6 rounded shadow-md">
+
             <div class="mb-4">
-                <label class="block font-bold mb-2 text-white">Asiakas:</label>
-                <select name="asiakasID" class="w-full border border-gray-300 px-4 py-2 rounded text-black">
-                    @foreach ($asiakkaat as $asiakas)
-                        <option value="{{ $asiakas->id }}">{{ $asiakas->nimi }}</option>
-                    @endforeach
-                </select>
+                <label class="block font-bold mb-2 text-white">Oletko uusi asiakas?</label>
+                <input type="radio" name="asiakas_status" value="new" id="newCustomer" class="mr-2" onclick="toggleCustomerForm(true)"> Uusi asiakas
+                <input type="radio" name="asiakas_status" value="existing" id="existingCustomer" class="mr-2" onclick="toggleCustomerForm(false)">  Kirjaudu
+            </div>
+
+            <div id="newCustomerForm" class="mb-4" style="display:none;">
+                <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-4 py-3 rounded hover:bg-gray-400">
+                    Rekisteröidy
+                </a>
+            </div>
+
+            <div id="existingCustomerForm" class="mb-4" style="display:none;">
+                <label for="puhelin" class="block font-bold mb-2 text-white">Puhelinnumero:</label>
+                <input type="text" name="puhelin" id="puhelin" class="border rounded px-4 py-2 w-full text-black" placeholder="Anna puhelinnumerosi">
             </div>
 
             <div class="mb-4">
@@ -56,10 +67,8 @@
                 <input type="date" name="palautuspvm" class="border rounded px-4 py-2 w-full text-black">
             </div>
 
-
             <div class="mt-4 text-center">
-
-                <button type="submit" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-full mt-7">Vahvista vuokraus</button>
+                <button type="submit" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-md mt-7">Vahvista vuokraus</button>
             </div>
         </div>
     </form>
@@ -74,5 +83,18 @@
             }, 3000);
         }
     });
+
+    function toggleCustomerForm(isNewCustomer) {
+        const newCustomerForm = document.getElementById('newCustomerForm');
+        const existingCustomerForm = document.getElementById('existingCustomerForm');
+
+        if (isNewCustomer) {
+            newCustomerForm.style.display = 'block';
+            existingCustomerForm.style.display = 'none';
+        } else {
+            newCustomerForm.style.display = 'none';
+            existingCustomerForm.style.display = 'block';
+        }
+    }
 </script>
 @endsection

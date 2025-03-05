@@ -54,7 +54,7 @@
                         type="submit"
                         class="absolute right-0 top-0 mr-2 mt-2 text-blue-500 hover:text-blue-700"
                     >
-                        Etsi
+                       Search
                     </button>
                 </form> --}}
                 @auth
