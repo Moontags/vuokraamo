@@ -14,9 +14,15 @@
         <div class="rounded shadow-sm p-4 text-center">
 
             <div class="mt-4">
-                <img src="{{ asset('storage/' . $tuote->kuva) }}" alt="{{ $tuote->nimi }}"
-                    class="w-full h-64 object-cover rounded">
+                @if($tuote->kuva)
+                    <img src="{{ asset('storage/' . $tuote->kuva) }}" alt="{{ $tuote->nimi }}"
+                        class="w-full h-64 object-cover rounded">
+                @else
+                    <img src="{{ asset('images/default-car.jpg') }}" alt="Ei kuvaa"
+                        class="w-full h-64 object-cover rounded">
+                @endif
             </div>
+
             <h3 class="text-white text-lg font-bold mt-6 mb-1">{{ $tuote->nimi }}</h3>
             <p class="text-white">{{ $tuote->kuvaus }}</p>
 

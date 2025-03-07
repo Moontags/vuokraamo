@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('myyja', MyyjaController::class);
     Route::resource('vuokraus', VuokrausController::class)->except(['index', 'show', 'create', 'store']);
     Route::get('/vuokralla', [VuokrausController::class, 'vuokralla'])->name('vuokraus.vuokralla');
+
+
 });
 
 Route::get('/login', function () {

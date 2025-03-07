@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <form action="{{ route('vuokraus.store') }}" method="POST" class="flex flex-wrap lg:flex-nowrap gap-6 items-start">
+    <form action="{{ route('vuokraus.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-wrap lg:flex-nowrap gap-6 items-start">
         @csrf
 
         <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col items-center mt-4">

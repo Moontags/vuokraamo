@@ -8,7 +8,6 @@
         </div>
     @endif
 
-    <!-- Otsikko ja "Lisää auto" -nappi -->
     <div class="flex justify-between items-center mb-6 px-4">
         <h1 class="text-3xl font-bold text-white text-center flex-grow">Vuokra automme</h1>
         @if(Auth::check() && Auth::user()->role === 'admin')
@@ -20,14 +19,14 @@
 
     @if ($tuotes->count() > 0)
         @foreach ($tuotes as $tuote)
-        <!-- Tuotekortti -->
+
         <div class="shadow-lg rounded p-6 text-center">
             <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-80 object-contain rounded mb-6 mx-auto sm:h-64 md:h-72 lg:h-80">
 
             <h3 class="text-2xl font-bold mb-4 text-white drop-shadow-lg">{{ $tuote->nimi }}</h3>
             <p class="mb-4 text-white drop-shadow-sm">{{ $tuote->kuvaus }}</p>
 
-            <!-- Hinta ja Vuokraa-nappi -->
+
             <div class="flex flex-col justify-center items-center text-center space-y-4 mt-4">
                 <div class="text-lg font-semibold text-white drop-shadow-lg">
                     {{ number_format($tuote->hinta, 2) }} € / Vuorokausi
@@ -38,7 +37,6 @@
                 </a>
             </div>
 
-            <!-- Toimintonapit pienille näytöille -->
             @if(Auth::check() && Auth::user()->role === 'admin')
                 <div class="md:hidden mt-4 flex flex-col items-center space-y-2">
                     <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}"
@@ -64,9 +62,8 @@
         </div>
         @endforeach
 
-        <!-- Navigointipainikkeet -->
         <div class="flex justify-between items-center mt-8 px-4">
-            <!-- Edellinen -->
+
             @if ($tuotes->onFirstPage())
                 <button class="bg-gray-500 text-white px-4 py-2 rounded cursor-not-allowed">
                     <i class="bi bi-arrow-left"></i> Edellinen
@@ -77,7 +74,6 @@
                 </a>
             @endif
 
-            <!-- Seuraava -->
             @if ($tuotes->hasMorePages())
                 <a href="{{ $tuotes->nextPageUrl() }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
                     Seuraava <i class="bi bi-arrow-right"></i>

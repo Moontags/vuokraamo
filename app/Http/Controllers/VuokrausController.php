@@ -24,11 +24,20 @@ class VuokrausController extends Controller
 
     public function create(Request $request, $tuoteID = null)
     {
+        $tuoteID = $tuoteID ?? $request->query('tuoteID');
+
+        if (!$tuoteID) {
+            return redirect()->route('tuote.index')->withErrors(['error' => 'Valitse ensin auto vuokrattavaksi.']);
+        }
+
+        $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
+        if (!$tuote) {
+            return redirect()->route('tuote.index')->withErrors(['error' => 'Valittua autoa ei löytynyt.']);
+        }
+
         $asiakkaat = DB::table('asiakas')
             ->select('id', DB::raw("CONCAT(etunimi, ' ', sukunimi) AS nimi"))
             ->get();
-
-        $tuote = $tuoteID ? DB::table('tuote')->where('tuoteID', $tuoteID)->first() : null;
 
         return view('vuokraus.create', compact('asiakkaat', 'tuote'));
     }
@@ -46,7 +55,7 @@ class VuokrausController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            // Asiakkaan käsittely
+
             if ($request->asiakas_status == 'new') {
                 $validatedData = $request->validate([
                     'etunimi' => 'required|string|max:100',
@@ -67,7 +76,7 @@ class VuokrausController extends Controller
                 $asiakasID = $asiakas->id;
             }
 
-            // Vuokrauksen tallennus
+            // 📌 Vuokrauksen tallennus
             $vuokrausID = DB::table('vuokraus')->insertGetId([
                 'asiakasID' => $asiakasID,
                 'vuokrauspvm' => $request->vuokrauspvm,
@@ -76,13 +85,20 @@ class VuokrausController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // Käsitellään mahdollinen kuva
-            $path = $request->hasFile('kuva') ? $request->file('kuva')->store('tuotekuvat', 'public') : null;
-
-            // Vuokrausrivien tallennus
             foreach ($request->tuotteet as $tuoteID) {
                 $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
                 $hinta = $tuote ? $tuote->hinta : 0.00;
+                $kuvaPolku = $tuote->kuva;
+
+
+                if ($request->hasFile('kuva')) {
+                    $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
+
+                    DB::table('tuote')->where('tuoteID', $tuoteID)->update([
+                        'kuva' => $kuvaPolku,
+                    ]);
+                }
+
 
                 DB::table('vuokrausrivi')->insert([
                     'vuokrausID' => $vuokrausID,
@@ -91,8 +107,8 @@ class VuokrausController extends Controller
                     'paattymisaika' => $request->palautuspvm,
                     'maara' => $request->input('maara', 1),
                     'hinta' => $hinta,
+                    'kuva' => $kuvaPolku,
                     'palautettu' => 0,
-                    'kuva' => $path,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -102,6 +118,7 @@ class VuokrausController extends Controller
         return redirect()->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]])
             ->with('success', 'Vuokraus tallennettu onnistuneesti!');
     }
+
 
     public function vuokralla()
     {
