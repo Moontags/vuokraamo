@@ -22,7 +22,7 @@
     <form action="{{ route('vuokraus.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-wrap lg:flex-nowrap gap-6 items-start">
         @csrf
 
-        <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col items-center mt-4">
+        <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col items-center">
             @if ($tuote)
 
                 <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-64 object-contain rounded mb-4">
@@ -40,14 +40,14 @@
 
         <div class="w-full lg:w-1/2 p-6 rounded shadow-md">
 
-            <div class="mb-4">
-                <label class="block font-bold mb-2 text-white">Oletko uusi asiakas?</label>
+            <div class="mb-7 bg-white p-2 rounded text-center">
+                <label class="block font-bold mb-4">Oletko uusi asiakas?</label>
                 <input type="radio" name="asiakas_status" value="new" id="newCustomer" class="mr-2" onclick="toggleCustomerForm(true)"> Uusi asiakas
                 <input type="radio" name="asiakas_status" value="existing" id="existingCustomer" class="mr-2" onclick="toggleCustomerForm(false)">  Kirjaudu
             </div>
 
-            <div id="newCustomerForm" class="mb-4" style="display:none;">
-                <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-4 py-3 rounded hover:bg-gray-400">
+            <div id="newCustomerForm" class="mb-4 text-center" style="display:none;">
+                <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-md mt-7">
                     Rekisteröidy
                 </a>
             </div>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="mt-4 text-center">
-                <button type="submit" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-md mt-7">Vahvista vuokraus</button>
+                <button type="submit" class="bg-gray-500 text-white px-3 py-3 rounded hover:bg-gray-400 w-md mt-3">Vahvista vuokraus</button>
             </div>
         </div>
     </form>
