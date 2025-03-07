@@ -28,10 +28,7 @@ class VuokrausController extends Controller
             ->select('id', DB::raw("CONCAT(etunimi, ' ', sukunimi) AS nimi"))
             ->get();
 
-        $tuote = null;
-        if ($tuoteID) {
-            $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
-        }
+        $tuote = $tuoteID ? DB::table('tuote')->where('tuoteID', $tuoteID)->first() : null;
 
         return view('vuokraus.create', compact('asiakkaat', 'tuote'));
     }
@@ -45,29 +42,32 @@ class VuokrausController extends Controller
             'palautuspvm' => 'nullable|date|after_or_equal:vuokrauspvm',
             'tuotteet' => 'required|array',
             'tuotteet.*' => 'exists:tuote,tuoteID',
+            'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if ($request->asiakas_status == 'new') {
-            $validatedData = $request->validate([
-                'etunimi' => 'required|string|max:100',
-                'sukunimi' => 'required|string|max:100',
-                'sahkoposti' => 'required|email|max:255|unique:asiakas,sahkoposti',
-                'lahiosoite' => 'nullable|string|max:100',
-                'postinumero' => 'nullable|string|max:5',
-                'postitoimipaikka' => 'nullable|string|max:100',
-                'puhelin' => 'nullable|string|max:15',
-            ]);
-            $asiakas = Asiakas::create($validatedData);
-            $asiakasID = $asiakas->id;
-        } else {
-            $asiakas = DB::table('asiakas')->where('puhelin', $request->puhelin)->first();
-            if (!$asiakas) {
-                return redirect()->back()->withErrors(['puhelin' => 'Tunnistetiedot eivät täsmää.']);
+        DB::transaction(function () use ($request) {
+            // Asiakkaan käsittely
+            if ($request->asiakas_status == 'new') {
+                $validatedData = $request->validate([
+                    'etunimi' => 'required|string|max:100',
+                    'sukunimi' => 'required|string|max:100',
+                    'sahkoposti' => 'required|email|max:255|unique:asiakas,sahkoposti',
+                    'lahiosoite' => 'nullable|string|max:100',
+                    'postinumero' => 'nullable|string|max:5',
+                    'postitoimipaikka' => 'nullable|string|max:100',
+                    'puhelin' => 'nullable|string|max:15',
+                ]);
+                $asiakas = Asiakas::create($validatedData);
+                $asiakasID = $asiakas->id;
+            } else {
+                $asiakas = DB::table('asiakas')->where('puhelin', $request->puhelin)->first();
+                if (!$asiakas) {
+                    throw new \Exception('Tunnistetiedot eivät täsmää.');
+                }
+                $asiakasID = $asiakas->id;
             }
-            $asiakasID = $asiakas->id;
-        }
 
-        DB::transaction(function () use ($request, $asiakasID) {
+            // Vuokrauksen tallennus
             $vuokrausID = DB::table('vuokraus')->insertGetId([
                 'asiakasID' => $asiakasID,
                 'vuokrauspvm' => $request->vuokrauspvm,
@@ -76,10 +76,13 @@ class VuokrausController extends Controller
                 'updated_at' => now(),
             ]);
 
+            // Käsitellään mahdollinen kuva
+            $path = $request->hasFile('kuva') ? $request->file('kuva')->store('tuotekuvat', 'public') : null;
+
+            // Vuokrausrivien tallennus
             foreach ($request->tuotteet as $tuoteID) {
                 $tuote = DB::table('tuote')->where('tuoteID', $tuoteID)->first();
                 $hinta = $tuote ? $tuote->hinta : 0.00;
-                $kuva = $tuote ? $tuote->kuva : null;
 
                 DB::table('vuokrausrivi')->insert([
                     'vuokrausID' => $vuokrausID,
@@ -88,16 +91,15 @@ class VuokrausController extends Controller
                     'paattymisaika' => $request->palautuspvm,
                     'maara' => $request->input('maara', 1),
                     'hinta' => $hinta,
-                    'kuva' => $kuva,
                     'palautettu' => 0,
+                    'kuva' => $path,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
         });
 
-        return redirect()
-            ->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]])
+        return redirect()->route('vuokraus.create', ['tuoteID' => $request->tuotteet[0]])
             ->with('success', 'Vuokraus tallennettu onnistuneesti!');
     }
 
@@ -113,7 +115,7 @@ class VuokrausController extends Controller
                 'vuokraus.vuokrauspvm',
                 'vuokraus.palautuspvm',
                 'tuote.nimi as tuote',
-                'vuokrausrivi.kuva',
+                'tuote.kuva',
                 'vuokrausrivi.maara'
             )
             ->paginate(3);

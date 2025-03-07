@@ -32,14 +32,18 @@
             </button>
 
             <nav
-                id="mobile-menu"
-                class="hidden md:flex md:space-x-8 absolute md:relative top-full left-0 w-full bg-black md:bg-transparent md:w-auto flex-col md:flex-row md:items-center"
-            >
+            id="mobile-menu"
+            class="hidden md:flex md:space-x-8 absolute md:relative top-full left-0 w-full bg-black md:bg-transparent md:w-auto flex-col md:flex-row md:items-center"
+        >
+            @if(Auth::check() && Auth::user()->role === 'admin')
                 <a href="{{ url('/asiakas') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Asiakas</a>
-                <a href="{{ url('/tuote') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Mallisto</a>
                 <a href="{{ url('/myyja') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Myyjä</a>
-                <a href="{{ url('/vuokraus') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Vuokraus</a>
-            </nav>
+            @endif
+
+            <a href="{{ url('/tuote') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Mallisto</a>
+            <a href="{{ url('/vuokraus') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Vuokraus</a>
+        </nav>
+
 
 
             <div class="flex items-center space-x-4">

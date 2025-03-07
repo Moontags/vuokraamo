@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tuote;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TuoteController extends Controller
@@ -109,19 +110,21 @@ class TuoteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
+        if (!Auth::check()) {
+            return redirect()->route('tuote.index')->withErrors(['error' => 'Sinulla ei ole oikeuksia poistaa tuotteita.']);
+        }
+
         $tuote = Tuote::findOrFail($id);
 
-        // Poistetaan kuva, jos se on olemassa
+        // Poista kuva tallennuksesta
         if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
             Storage::delete('public/' . $tuote->kuva);
         }
 
-        // Poistetaan tuote tietokannasta
         $tuote->delete();
 
-        // Palauta onnistumisviesti
         return redirect()->route('tuote.index')->with('success', 'Tuote poistettu onnistuneesti!');
     }
 }

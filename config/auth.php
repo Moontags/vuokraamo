@@ -13,10 +13,11 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
-    ],
+   'defaults' => [
+    'guard' => 'web', // Ei pakoteta authia
+    'passwords' => 'users',
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +63,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Myyja::class),
+            'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
         // 'users' => [

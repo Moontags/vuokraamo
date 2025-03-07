@@ -11,9 +11,12 @@
     <!-- Otsikko ja "Lisää auto" -nappi -->
     <div class="flex justify-between items-center mb-6 px-4">
         <h1 class="text-3xl font-bold text-white text-center flex-grow">Vuokra automme</h1>
+        @if(Auth::check() && Auth::user()->role === 'admin')
         <a href="{{ route('tuote.create') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded ml-4">
             Lisää
         </a>
+    @endif
+
     </div>
 
     @if ($tuotes->count() > 0)
@@ -75,11 +78,16 @@
             <div class="hidden md:flex justify-center space-x-4">
                 <a href="{{ route('tuote.show', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-black-500 text-white px-4 py-2 rounded hover:bg-gray-400">Katso</a>
                 <a href="{{ route('tuote.edit', ['tuote' => $tuotes[0]->tuoteID]) }}" class="bg-black-500 text-white px-4 py-2 rounded hover:bg-gray-400">Päivitä</a>
-                <form action="{{ route('tuote.destroy', ['tuote' => $tuotes[0]->tuoteID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-black-400 text-white px-4 py-2 rounded hover:bg-red-600">Poista</button>
-                </form>
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                        <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}" method="POST"
+                            onsubmit="return confirm('Haluatko varmasti poistaa tämän tuotteen?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-white hover:bg-red-100 px-4 py-2 rounded w-full text-center">
+                                Poista
+                            </button>
+                        </form>
+                    @endif
             </div>
 
             <!-- Seuraava -->

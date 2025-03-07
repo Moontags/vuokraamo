@@ -13,7 +13,7 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
-        return view('auth.login'); // Varmista, että auth/login.blade.php on olemassa
+        return view('auth.login');
     }
 
     /**
@@ -22,25 +22,22 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-            'kayttajatunnus' => 'required|string',
-            'salasana' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string',
         ]);
 
-        $credentials = [
-            'kayttajatunnus' => $request->input('kayttajatunnus'),
-            'password' => $request->input('salasana'),
-        ];
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('asiakas')->with('success', 'Kirjautuminen onnistui!');
+            return redirect()->intended('/')->with('success', 'Kirjautuminen onnistui!');
         }
 
         return back()->withErrors([
-            'kayttajatunnus' => 'Käyttäjätunnus tai salasana on virheellinen.',
-        ])->onlyInput('kayttajatunnus');
+            'email' => 'Käyttäjätunnus tai salasana on virheellinen.',
+        ])->onlyInput('email');
     }
+
 
     /**
      * Käsittele uloskirjautuminen.
