@@ -10,19 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
     {
-        Schema::table('users', function (Blueprint $table) {
-        $table->string('role')->default('asiakas')->after('password');
+        Schema::table('vuokrausrivi', function (Blueprint $table) {
+            $table->string('kuva')->nullable()->after('hinta'); // Lisää kuvan sarake
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('vuokrausrivi', function (Blueprint $table) {
+            $table->dropColumn('kuva');
         });
     }
+
 };

@@ -17,7 +17,7 @@
             <span>{{ session('info') }}</span>
         </div>
     @endif
->
+
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
             <ul>
