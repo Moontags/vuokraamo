@@ -25,7 +25,7 @@
         <div class="w-full lg:w-1/2 p-4 rounded shadow-md flex flex-col items-center">
             @if ($tuote)
 
-                <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-64 object-contain rounded mb-4">
+                <img src="{{ Storage::url($tuote->kuva) }}" alt="{{ $tuote->nimi }}" class="w-full h-64 object-contain mb-4">
                 <input type="hidden" name="tuotteet[]" value="{{ $tuote->tuoteID }}">
 
                 <div class="text-center">
@@ -42,8 +42,10 @@
 
             <div class="mb-7 bg-white p-2 rounded text-center">
                 <label class="block font-bold mb-4">Oletko uusi asiakas?</label>
-                <input type="radio" name="asiakas_status" value="new" id="newCustomer" class="mr-2" onclick="toggleCustomerForm(true)"> Uusi asiakas
-                <input type="radio" name="asiakas_status" value="existing" id="existingCustomer" class="mr-2" onclick="toggleCustomerForm(false)">  Kirjaudu
+                <div class="flex justify-center gap-2">
+                <input type="radio" name="asiakas_status" value="new" id="newCustomer" class="mr-1" onclick="toggleCustomerForm(true)"> Uusi asiakas
+                <input type="radio" name="asiakas_status" value="existing" id="existingCustomer" class="mr-1" onclick="toggleCustomerForm(false)"> Kirjaudu
+            </div>
             </div>
 
             <div id="newCustomerForm" class="mb-4 text-center" style="display:none;">

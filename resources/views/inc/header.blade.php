@@ -11,7 +11,7 @@
 
             @if(isset(Auth::user()->role) && Auth::user()->role === 'admin')
                 <a href="{{ url('/asiakas') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Asiakas</a>
-                <a href="{{ url('/myyja') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Myyjä</a>
+                <a href="{{ url('/myyja') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Henkilökunta</a>
             @endif
 
             <a href="{{ url('/tuote') }}" class="block text-white hover:text-blue-500 px-4 py-2 md:py-0">Mallisto</a>

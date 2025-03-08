@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container max-w-4xl mx-auto py-8 flex-grow mt-8 px-4">
-    <h1 class="text-3xl text-white font-bold mb-6">Lisää Myyjä</h1>
+    <h1 class="text-3xl text-white font-bold mb-6">Lisää Työntekijä</h1>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">

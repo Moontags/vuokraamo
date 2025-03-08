@@ -8,17 +8,12 @@ use App\Helpers\AppHelper;
 
 class AuthController extends Controller
 {
-    /**
-     * Näytä kirjautumislomake.
-     */
+
     public function loginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Käsittele kirjautuminen.
-     */
     public function authenticate(Request $request)
     {
         $request->validate([
@@ -38,10 +33,6 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-
-    /**
-     * Käsittele uloskirjautuminen.
-     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -52,9 +43,6 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Uloskirjautuminen onnistui!');
     }
 
-    /**
-     * Tarkista käyttäjän kirjautumisstatus.
-     */
     public static function tarkistaKirjautuminen()
     {
         return AppHelper::tarkistaKirjautuminen();

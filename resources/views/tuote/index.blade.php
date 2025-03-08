@@ -26,7 +26,6 @@
             <h3 class="text-2xl font-bold mb-4 text-white drop-shadow-lg">{{ $tuote->nimi }}</h3>
             <p class="mb-4 text-white drop-shadow-sm">{{ $tuote->kuvaus }}</p>
 
-
             <div class="flex flex-col justify-center items-center text-center space-y-4 mt-4">
                 <div class="text-lg font-semibold text-white drop-shadow-lg">
                     {{ number_format($tuote->hinta, 2) }} € / Vuorokausi
@@ -37,14 +36,15 @@
                 </a>
             </div>
 
-            @if(Auth::check() && Auth::user()->role === 'admin')
-                <div class="md:hidden mt-4 flex flex-col items-center space-y-2">
-                    <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}"
-                       class="text-white hover:bg-gray-400 px-4 py-2 rounded w-full text-center">
-                       Katso
-                    </a>
+            <div class="flex justify-center space-x-6 mt-8">
+                <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}"
+                   class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                   Katso
+                </a>
+
+                @if(Auth::check() && Auth::user()->role === 'admin')
                     <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}"
-                       class="text-white hover:bg-gray-400 px-4 py-2 rounded w-full text-center">
+                       class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
                        Päivitä
                     </a>
                     <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}"
@@ -53,17 +53,17 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                                class="text-white hover:bg-red-100 px-4 py-2 rounded w-full text-center">
+                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400">
                             Poista
                         </button>
                     </form>
-                </div>
-            @endif
+                @endif
+            </div>
+
         </div>
         @endforeach
 
         <div class="flex justify-between items-center mt-8 px-4">
-
             @if ($tuotes->onFirstPage())
                 <button class="bg-gray-500 text-white px-4 py-2 rounded cursor-not-allowed">
                     <i class="bi bi-arrow-left"></i> Edellinen

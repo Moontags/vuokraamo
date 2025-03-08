@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mx-auto py-8 flex-grow max-w-2xl">
-    <h1 class="text-3xl font-bold mb-6 text-white">Myyjän tiedot</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Työntekijä</h1>
 
     <div class="bg-white p-6 rounded shadow-md">
         <p><strong>ID:</strong> {{ $myyja->myyjaID }}</p>

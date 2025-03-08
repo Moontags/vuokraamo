@@ -8,8 +8,8 @@
     </div>
     @endif
 
-    <h1 class="text-3xl font-bold mb-6 text-white text-center">Myyjät</h1>
-    <a href="{{ route('myyja.create') }}" class="bg-gray-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-gray-400 mx-4 mt-4">Lisää uusi myyjä</a>
+    <h1 class="text-3xl font-bold mb-6 text-white text-center">Työntekijät</h1>
+    <a href="{{ route('myyja.create') }}" class="bg-gray-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-gray-400 mx-4 mt-4">Lisää uusi Työntekijä</a>
 
     <div class="hidden md:block">
         <table class="min-w-full bg-white border border-gray-300 text-center">
@@ -33,7 +33,7 @@
                         <div class="flex justify-center space-x-2">
                             <a href="{{ route('myyja.show', ['myyja' => $myyja->myyjaID]) }}" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Katso</a>
                             <a href="{{ route('myyja.edit', ['myyja' => $myyja->myyjaID]) }}" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Muokkaa</a>
-                            <form action="{{ route('myyja.destroy', ['myyja' => $myyja->myyjaID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän myyjän?')">
+                            <form action="{{ route('myyja.destroy', ['myyja' => $myyja->myyjaID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän henkilön?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Poista</button>
@@ -56,7 +56,7 @@
             <div class="flex justify-center space-x-2 mt-4">
                 <a href="{{ route('myyja.show', ['myyja' => $myyja->myyjaID]) }}" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Katso</a>
                 <a href="{{ route('myyja.edit', ['myyja' => $myyja->myyjaID]) }}" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Muokkaa</a>
-                <form action="{{ route('myyja.destroy', ['myyja' => $myyja->myyjaID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän myyjän?')">
+                <form action="{{ route('myyja.destroy', ['myyja' => $myyja->myyjaID]) }}" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa tämän henkilön?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-400">Poista</button>

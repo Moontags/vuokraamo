@@ -31,29 +31,34 @@ class AsiakasController extends Controller
             'puhelin' => 'nullable|string|max:15',
         ]);
 
-        Asiakas::create($validatedData);
 
-        return redirect()->route('asiakas.index')->with('success', 'Asiakas lisätty onnistuneesti!');
+        $asiakas = Asiakas::create($validatedData);
+
+
+        return redirect()->route('asiakas.create')->with([
+            'success' => 'Onneksi olkoon! Asiakastietosi ovat nyt tallentuneet. Aloita valitsemalla auto!',
+            'asiakasID' => $asiakas->id,
+        ]);
     }
+
 
     public function show($id)
     {
-        $asiakas = Asiakas::findOrFail($id); // Varmistaa, että asiakas löytyy
+        $asiakas = Asiakas::findOrFail($id);
         return view('asiakas.show', compact('asiakas'));
     }
 
     public function edit($id)
     {
-        $asiakas = Asiakas::findOrFail($id); // Varmistaa, että asiakas löytyy
+        $asiakas = Asiakas::findOrFail($id);
         return view('asiakas.edit', compact('asiakas'));
     }
 
     public function update(Request $request, $id)
     {
-        // Hae asiakas tietokannasta tai heitä virhe, jos asiakasta ei löydy
         $asiakas = Asiakas::findOrFail($id);
 
-        // Validoi lomakkeen tiedot
+
         $validatedData = $request->validate([
             'etunimi' => 'required|string|max:100',
             'sukunimi' => 'required|string|max:100',
@@ -64,18 +69,18 @@ class AsiakasController extends Controller
             'puhelin' => 'nullable|string|max:15',
         ]);
 
-        // Pakotettu päivitys ilman isDirty-tarkistusta
+
         $asiakas->forceFill($validatedData)->save();
 
-        // Palautetaan käyttäjälle onnistumisviesti
-        return redirect()->route('asiakas.index')->with('success', 'Asiakastiedot päivitetty onnistuneesti!');
+
+        return redirect()->route('vuokraus.create')->with('success', 'Asiakastiedot päivitetty onnistuneesti!');
     }
 
     public function destroy($id)
     {
-        $asiakas = Asiakas::findOrFail($id); // Varmistaa, että asiakas löytyy
+        $asiakas = Asiakas::findOrFail($id);
 
         $asiakas->delete();
-        return redirect()->route('asiakas.index')->with('success', 'Asiakas poistettu onnistuneesti!');
+        return redirect()->route('asiakas.index')->with('success', 'Asiakastiesdot poistettu onnistuneesti!');
     }
 }

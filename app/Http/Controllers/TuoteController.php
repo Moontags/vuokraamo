@@ -10,29 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class TuoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $tuotes = DB::table('tuote')->paginate(1); // Näytetään 1 tuote per sivu
+        $tuotes = DB::table('tuote')->paginate(1);
         return view('tuote.index', compact('tuotes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('tuote.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        // Validoi lomaketiedot
+
         $request->validate([
             'nimi' => 'required|string|max:255',
             'kuvaus' => 'required|string',
@@ -41,10 +35,10 @@ class TuoteController extends Controller
             'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Tallenna tiedoston nimi, jos kuva on ladattu
+
         $kuvaPolku = $request->hasFile('kuva') ? $request->file('kuva')->store('tuotekuvat', 'public') : null;
 
-        // Luo uusi tuote
+
         Tuote::create([
             'nimi' => $request->input('nimi'),
             'kuvaus' => $request->input('kuvaus'),
@@ -53,31 +47,23 @@ class TuoteController extends Controller
             'kuva' => $kuvaPolku,
         ]);
 
-        // Palauta onnistumisviesti
         return redirect()->route('tuote.index')->with('success', 'Tuote lisätty onnistuneesti!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $tuote = Tuote::findOrFail($id);
         return view('tuote.show', compact('tuote'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $tuote = Tuote::findOrFail($id);
         return view('tuote.edit', compact('tuote'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -91,7 +77,6 @@ class TuoteController extends Controller
 
         $tuote = Tuote::findOrFail($id);
 
-        // Käsitellään kuvan päivitys
         if ($request->hasFile('kuva')) {
             if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
                 Storage::delete('public/' . $tuote->kuva);
@@ -100,16 +85,13 @@ class TuoteController extends Controller
             $tuote->kuva = $request->file('kuva')->store('tuotekuvat', 'public');
         }
 
-        // Päivitä muut tiedot
+
         $tuote->update($request->only(['nimi', 'kuvaus', 'kpl', 'hinta', 'kategoria']));
 
-        // Palauta onnistumisviesti
+
         return redirect()->route('tuote.index')->with('success', 'Tuote päivitetty onnistuneesti!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         if (!Auth::check()) {
@@ -118,7 +100,6 @@ class TuoteController extends Controller
 
         $tuote = Tuote::findOrFail($id);
 
-        // Poista kuva tallennuksesta
         if ($tuote->kuva && Storage::exists('public/' . $tuote->kuva)) {
             Storage::delete('public/' . $tuote->kuva);
         }
