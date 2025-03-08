@@ -3,10 +3,10 @@
 @section('title', 'Lisää uusi asiakas')
 
 @section('content')
-<div class="container mx-auto py-8 max-w-4xl" id="asiakas-container">
+<div class="container mx-auto py-8 px-2 max-w-4xl" id="asiakas-container">
 
     @if (session('success'))
-        <div id="success-message" class="text-white text-center text-2xl font-semibold mt-18">
+        <div id="success-message" class="text-white text-center text-2xl font-semibold mt-16">
             {{ session('success') }}
         </div>
         <script>
