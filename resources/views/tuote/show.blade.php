@@ -12,7 +12,7 @@
             <p class="mb-2"><strong>Hinta:</strong> {{ number_format($tuote->hinta, 2) }} €</p>
             <p class="mb-2"><strong>Kappalemäärä:</strong> {{ $tuote->kpl }}</p>
             <div class="mb-4">
-                <p><strong>Kuva:</strong></p>
+
                 @if ($tuote->kuva)
                 <img src="{{ url('storage/' . $tuote->kuva) }}" alt="Tuotekuva" class="w-full rounded shadow-md">
                 @else
