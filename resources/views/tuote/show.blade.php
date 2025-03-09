@@ -20,7 +20,7 @@
                 @endif
             </div>
         </div>
-        <a href="{{ route('tuote.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded block text-center">Takaisin</a>
+        <a href="{{ route('tuote.index') }}" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded block text-center">Takaisin</a>
     </div>
 </main>
 @endsection
