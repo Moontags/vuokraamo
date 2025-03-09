@@ -9,14 +9,20 @@ class Vuokraus extends Model
 {
     use HasFactory;
 
-    protected $table = 'vuokraus'; // Taulun nimi tietokannassa
+    protected $table = 'vuokraus';
 
     protected $fillable = [
         'asiakasID',
-        'tuote_id', // Lisää tämä vain, jos se on tarpeen
+         'tuote_id',
         'vuokrauspvm',
         'palautuspvm',
         'created_at',
         'updated_at',
+
+    ];
+
+    protected $dates = [
+        'vuokrauspvm',
+        'palautuspvm',
     ];
 }

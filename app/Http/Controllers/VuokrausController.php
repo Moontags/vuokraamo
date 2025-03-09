@@ -47,12 +47,13 @@ class VuokrausController extends Controller
         $request->validate([
             'asiakas_status' => 'required',
             'puhelin' => 'nullable|string|max:15',
-            'vuokrauspvm' => 'required|date',
-            'palautuspvm' => 'nullable|date|after_or_equal:vuokrauspvm',
+            'vuokrauspvm' => 'required|date_format:Y-m-d\TH:i',
+            'palautuspvm' => 'nullable|date_format:Y-m-d\TH:i|after_or_equal:vuokrauspvm',
             'tuotteet' => 'required|array',
             'tuotteet.*' => 'exists:tuote,tuoteID',
             'kuva' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
 
         DB::transaction(function () use ($request) {
 
@@ -90,7 +91,6 @@ class VuokrausController extends Controller
                 $hinta = $tuote ? $tuote->hinta : 0.00;
                 $kuvaPolku = $tuote->kuva;
 
-
                 if ($request->hasFile('kuva')) {
                     $kuvaPolku = $request->file('kuva')->store('tuotekuvat', 'public');
 
@@ -98,13 +98,13 @@ class VuokrausController extends Controller
                         'kuva' => $kuvaPolku,
                     ]);
                 }
-
-
                 DB::table('vuokrausrivi')->insert([
                     'vuokrausID' => $vuokrausID,
                     'tuoteID' => $tuoteID,
-                    'alkamisaika' => $request->vuokrauspvm,
-                    'paattymisaika' => $request->palautuspvm,
+                    'asiakas_nimi' => DB::table('asiakas')->where('id', $asiakasID)->value(DB::raw("CONCAT(etunimi, ' ', sukunimi)")),
+                    'puhelin' => DB::table('asiakas')->where('id', $asiakasID)->value('puhelin'), // Lisätään puhelinnumero
+                    'alkamisaika' => date('Y-m-d H:i:s', strtotime($request->vuokrauspvm)),
+                    'paattymisaika' => date('Y-m-d H:i:s', strtotime($request->palautuspvm)),
                     'maara' => $request->input('maara', 1),
                     'hinta' => $hinta,
                     'kuva' => $kuvaPolku,
@@ -119,7 +119,6 @@ class VuokrausController extends Controller
             ->with('success', 'Vuokraus tallennettu onnistuneesti!');
     }
 
-
     public function vuokralla()
     {
         $vuokraukset = DB::table('vuokraus')
@@ -129,6 +128,7 @@ class VuokrausController extends Controller
             ->select(
                 'vuokraus.id',
                 DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"),
+                'asiakas.puhelin', // 🔹 Lisää tämä
                 'vuokraus.vuokrauspvm',
                 'vuokraus.palautuspvm',
                 'tuote.nimi as tuote',

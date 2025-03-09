@@ -8,8 +8,8 @@
     </div>
     @endif
 
-    <h1 class="text-3xl font-bold mb-6 text-white text-center">Työntekijät</h1>
-    <a href="{{ route('myyja.create') }}" class="bg-gray-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-gray-400 mx-4 mt-4">Lisää uusi Työntekijä</a>
+    <h1 class="text-3xl font-bold mb-8 text-white text-center">Työntekijät</h1>
+    <a href="{{ route('myyja.create') }}" class="bg-gray-500 text-white px-3 py-1 rounded mb-6 inline-block hover:bg-gray-400 mx-4 mt-4">Lisää työntekijä</a>
 
     <div class="hidden md:block">
         <table class="min-w-full bg-white border border-gray-300 text-center">

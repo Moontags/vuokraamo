@@ -5,9 +5,9 @@
 @section('content')
 <div class="container mx-auto py-8 flex-grow mt-8 text-black rounded shadow-md p-4 md:p-10">
 
-    <h1 class="text-3xl font-bold mb-6 text-center text-white">Asiakastiedot</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center text-white">Asiakastiedot</h1>
 
-    <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-gray-400">Lisää asiakas</a>
+    <a href="{{ route('asiakas.create') }}" class="bg-gray-500 text-white px-3 py-1 rounded mb-4 inline-block hover:bg-gray-400 ml-4">uusi asiakas</a>
 
     <div class="hidden md:block overflow-x-auto max-w-5xl mx-auto rounded-md">
         <table class="min-w-full bg-gray-100 text-center text-black border border-gray-300">

@@ -60,13 +60,13 @@
             </div>
 
             <div class="mb-4">
-                <label class="block font-bold mb-2 text-white">Vuokrauspäivämäärä:</label>
-                <input type="date" name="vuokrauspvm" required class="border rounded px-4 py-2 w-full text-black">
+                <label class="block font-bold mb-2 text-white">Vuokrauksen alkamisaika:</label>
+                <input type="datetime-local" name="vuokrauspvm" required class="border rounded px-4 py-2 w-full text-black">
             </div>
 
             <div class="mb-4">
-                <label class="block font-bold mb-2 text-white">Palautuspäivämäärä:</label>
-                <input type="date" name="palautuspvm" class="border rounded px-4 py-2 w-full text-black">
+                <label class="block font-bold mb-2 text-white">Vuokrauksen päättymisaika:</label>
+                <input type="datetime-local" name="palautuspvm" required class="border rounded px-4 py-2 w-full text-black">
             </div>
 
             <div class="mt-4 text-center">

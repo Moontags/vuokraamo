@@ -18,6 +18,7 @@
                     <h3 class="text-lg font-bold text-white">{{ $vuokraus->tuote }}</h3>
                     <p class="text-white">Vuokraus ID: {{ $vuokraus->id }}</p>
                     <p class="text-white">Asiakas: {{ $vuokraus->asiakas }}</p>
+                    <p class="text-white">Puhelin: {{ $vuokraus->puhelin }}</p>
                     <p class="text-white">Vuokrauspvm: {{ $vuokraus->vuokrauspvm }}</p>
                     <p class="text-white">Palautuspvm: {{ $vuokraus->palautuspvm }}</p>
                 </div>
