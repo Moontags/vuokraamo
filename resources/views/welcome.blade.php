@@ -85,7 +85,7 @@
             <h1 class="text-5xl font-bold text-white">RentXpress</h1>
             <p class="mt-6 text-2xl text-white">Helppoa vuokrausta vaikeisiinkin olosuhteisiin vuodesta 1985</p>
             <div class="mt-12">
-                <a href="{{ route('vuokraus.index') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-3 rounded shadow">
+                <a href="{{ route('vuokraus.index') }}" class="px-3 py-2 border border-gray-200 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     Vuokraa
                 </a>
             </div>

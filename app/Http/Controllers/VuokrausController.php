@@ -102,7 +102,7 @@ class VuokrausController extends Controller
                     'vuokrausID' => $vuokrausID,
                     'tuoteID' => $tuoteID,
                     'asiakas_nimi' => DB::table('asiakas')->where('id', $asiakasID)->value(DB::raw("CONCAT(etunimi, ' ', sukunimi)")),
-                    'puhelin' => DB::table('asiakas')->where('id', $asiakasID)->value('puhelin'), // Lisätään puhelinnumero
+                    'puhelin' => DB::table('asiakas')->where('id', $asiakasID)->value('puhelin'),
                     'alkamisaika' => date('Y-m-d H:i:s', strtotime($request->vuokrauspvm)),
                     'paattymisaika' => date('Y-m-d H:i:s', strtotime($request->palautuspvm)),
                     'maara' => $request->input('maara', 1),
@@ -128,7 +128,7 @@ class VuokrausController extends Controller
             ->select(
                 'vuokraus.id',
                 DB::raw("CONCAT(asiakas.etunimi, ' ', asiakas.sukunimi) as asiakas"),
-                'asiakas.puhelin', // 🔹 Lisää tämä
+                'asiakas.puhelin',
                 'vuokraus.vuokrauspvm',
                 'vuokraus.palautuspvm',
                 'tuote.nimi as tuote',
@@ -139,4 +139,15 @@ class VuokrausController extends Controller
 
         return view('vuokraus.vuokralla', compact('vuokraukset'));
     }
+
+    public function palauta($id)
+    {
+
+        DB::table('vuokrausrivi')
+            ->where('vuokrausID', $id)
+            ->delete();
+
+        return redirect()->route('vuokraus.vuokralla')->with('success', 'Vuokraus palautettu ja poistettu onnistuneesti.');
+    }
+
 }

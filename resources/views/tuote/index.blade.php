@@ -9,9 +9,9 @@
     @endif
 
     <div class="flex justify-between items-center mb-6 px-4">
-        <h1 class="text-3xl font-bold text-white text-center flex-grow">Vuokra automme</h1>
+        <h1 class="text-3xl font-bold text-white text-center flex-grow">Autonvuokraus</h1>
         @if(Auth::check() && Auth::user()->role === 'admin')
-            <a href="{{ route('tuote.create') }}" class="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded ml-4">
+            <a href="{{ route('tuote.create') }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                 Lisää
             </a>
         @endif
@@ -31,20 +31,20 @@
                     {{ number_format($tuote->hinta, 2) }} € / Vuorokausi
                 </div>
                 <a href="{{ route('vuokraus.create', ['tuoteID' => $tuote->tuoteID]) }}"
-                   class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-400 shadow-md">
+                   class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     Vuokraa
                 </a>
             </div>
 
             <div class="flex justify-center space-x-6 mt-8">
                 <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}"
-                   class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                   class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                    Katso
                 </a>
 
                 @if(Auth::check() && Auth::user()->role === 'admin')
                     <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}"
-                       class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                       class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                        Päivitä
                     </a>
                     <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}"
@@ -53,7 +53,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400">
+                                class="px-3 py-1 border border-red-500 text-red-500 rounded-md bg-transparent hover:bg-red-500 hover:text-white transition">
                             Poista
                         </button>
                     </form>
@@ -65,21 +65,21 @@
 
         <div class="flex justify-between items-center mt-8 px-4">
             @if ($tuotes->onFirstPage())
-                <button class="bg-gray-500 text-white px-4 py-2 rounded cursor-not-allowed">
+                <button class="px-3 py-1 border border-white text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </button>
             @else
-                <a href="{{ $tuotes->previousPageUrl() }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                <a href="{{ $tuotes->previousPageUrl() }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </a>
             @endif
 
             @if ($tuotes->hasMorePages())
-                <a href="{{ $tuotes->nextPageUrl() }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                <a href="{{ $tuotes->nextPageUrl() }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </a>
             @else
-                <button class="bg-gray-500 text-white px-4 py-2 rounded opacity-50 cursor-not-allowed">
+                <button class="px-3 py-1 border border-white text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </button>
             @endif

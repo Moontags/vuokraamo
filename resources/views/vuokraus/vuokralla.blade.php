@@ -20,7 +20,21 @@
                     <p class="text-white">Asiakas: {{ $vuokraus->asiakas }}</p>
                     <p class="text-white">Puhelin: {{ $vuokraus->puhelin }}</p>
                     <p class="text-white">Vuokrauspvm: {{ $vuokraus->vuokrauspvm }}</p>
-                    <p class="text-white">Palautuspvm: {{ $vuokraus->palautuspvm }}</p>
+                    {{-- 🔹 Vuokrauspvm, Palautuspvm ja "Palautettu"-nappi samalla rivillä --}}
+                    <div class="flex items-center justify-between text-white">
+
+                        <p>Palautuspvm: {{ $vuokraus->palautuspvm }}</p>
+
+                        <form action="{{ route('vuokraus.palauta', $vuokraus->id) }}" method="POST" class="inline-block ml-4">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="px-3 py-1 mt-4 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                                Palautettu
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
             @endforeach
