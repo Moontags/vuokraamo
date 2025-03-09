@@ -9,9 +9,9 @@ class Asiakas extends Model
 {
     use HasFactory;
 
-    protected $table = 'asiakas'; // Taulun nimi
-    protected $primaryKey = 'id'; // Oletusavain 'id'
-    public $timestamps = true; // Oletus
+    protected $table = 'asiakas';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
     protected $fillable = [
         'etunimi',
