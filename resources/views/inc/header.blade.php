@@ -24,7 +24,7 @@
                     @csrf
                     <button type="submit" class="text-white hover:text-red-500 flex items-center">
                         <i class="bi bi-box-arrow-right text-lg"></i>
-                        <span class="ml-1">Ulos</span>
+                        <span class="ml-1">Kirjaudu ulos</span>
                     </button>
                 </form>
             @endauth

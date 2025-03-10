@@ -5,7 +5,6 @@
 @section('content')
 <div class="container mx-auto py-8 flex-grow mt-8 text-white rounded shadow-md p-4 md:p-10 bg-transparent">
 
-
 @if (session('success'))
 <div id="success-message" class="bg-green-100 text-green-700 p-4 rounded mb-4">
     <span>{{ session('success') }}</span>

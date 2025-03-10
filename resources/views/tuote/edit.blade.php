@@ -27,7 +27,6 @@
             @csrf
             @method('PUT')
 
-
             <div class="md:w-1/2 md:pr-6">
 
                 <div class="mb-4">
@@ -61,7 +60,6 @@
                     </a>
                 </div>
             </div>
-
 
             <div class="md:w-1/2 md:pl-6 flex flex-col items-center">
                 <div>
