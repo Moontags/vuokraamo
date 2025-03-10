@@ -29,8 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/vuokraus/{id}/palauta', [VuokrausController::class, 'palauta'])->name('vuokraus.palauta');
 
 
-
-
 });
 
 Route::get('/login', function () {

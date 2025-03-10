@@ -25,13 +25,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Kirjautuminen onnistui!');
+            return redirect()->route('vuokraus.index')->with('success', 'Olet nyt kirjautunut onnistuneesti!');
         }
 
         return back()->withErrors([
             'email' => 'Käyttäjätunnus tai salasana on virheellinen.',
         ])->onlyInput('email');
     }
+
 
     public function logout(Request $request)
     {
