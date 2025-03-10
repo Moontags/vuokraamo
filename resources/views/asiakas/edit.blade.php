@@ -7,10 +7,11 @@
     <h1 class="text-3xl font-bold mb-6">Muokkaa asiakastietoja</h1>
 
     @if (session('success'))
-        <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
-            <span>{{ session('success') }}</span>
-        </div>
-    @endif
+    <div id="success-message" class="bg-green-100 text-green-700 p-4 rounded mb-4">
+        <span>{{ session('success') }}</span>
+    </div>
+@endif
+
 
     @if (session('info'))
         <div class="bg-blue-100 text-blue-700 p-4 rounded mb-4">
@@ -70,4 +71,5 @@
         <a href="{{ route('asiakas.index') }}" class="text-gray-500 ml-4">Peruuta</a>
     </form>
 </div>
+
 @endsection

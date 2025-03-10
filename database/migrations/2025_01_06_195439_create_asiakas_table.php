@@ -4,11 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up()
     {
         Schema::create('asiakas', function (Blueprint $table) {
@@ -20,16 +16,13 @@ return new class extends Migration
             $table->string('postinumero', 5)->nullable();
             $table->string('postitoimipaikka', 100)->nullable();
             $table->string('puhelin', 15)->nullable();
-            $table->string('password')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('asiakas');
     }

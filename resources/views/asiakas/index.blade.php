@@ -5,6 +5,13 @@
 @section('content')
 <div class="container mx-auto py-8 flex-grow mt-8 text-white rounded shadow-md p-4 md:p-10 bg-transparent">
 
+
+@if (session('success'))
+<div id="success-message" class="bg-green-100 text-green-700 p-4 rounded mb-4">
+    <span>{{ session('success') }}</span>
+</div>
+@endif
+
     <h1 class="text-3xl font-bold mb-8 text-center">Asiakastiedot</h1>
 
     <a href="{{ route('asiakas.create') }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition mb-4 inline-block ml-4">

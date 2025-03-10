@@ -72,15 +72,15 @@ class AsiakasController extends Controller
 
         $asiakas->forceFill($validatedData)->save();
 
-
-        return redirect()->route('vuokraus.create')->with('success', 'Asiakastiedot päivitetty onnistuneesti!');
+        return redirect()->route('asiakas.edit', $asiakas->id)->with('success', 'Asiakastiedot päivitettiin onnistuneesti!');;
     }
 
     public function destroy($id)
     {
         $asiakas = Asiakas::findOrFail($id);
-
         $asiakas->delete();
-        return redirect()->route('asiakas.index')->with('success', 'Asiakastiesdot poistettu onnistuneesti!');
+
+        return redirect()->route('asiakas.index')->with('success', 'Asiakastiedot poistettu onnistuneesti!');
     }
+
 }

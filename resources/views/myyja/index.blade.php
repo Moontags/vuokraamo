@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="container mx-auto py-8 max-w-4xl bg-transparent">
+
     @if (session('success'))
-    <div id="successMessage" class="bg-green-100 text-green-700 p-6 rounded mb-4">
+    <div id="success-message" class="bg-green-100 text-green-700 p-6 rounded mb-4">
        {{ session('success') }}
     </div>
     @endif
