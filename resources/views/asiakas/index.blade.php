@@ -60,7 +60,6 @@
         </table>
     </div>
 
-    {{-- 📌 Mobiiliversion korjaus --}}
     <div class="block md:hidden mx-4 bg-transparent">
         @foreach ($asiakkaat as $asiakas)
         <div class="bg-transparent border border-gray-500 rounded p-4 mb-4 shadow-md">

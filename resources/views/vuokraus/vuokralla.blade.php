@@ -4,6 +4,12 @@
 <div class="container mx-auto py-8 mt-8">
     <h1 class="text-3xl font-bold mb-6 text-white mx-10">Vuokralla olevat</h1>
 
+        @if (session('success'))
+        <div id="success-message" class="bg-green-100 text-green-700 p-4 rounded mb-4">
+            <span>{{ session('success') }}</span>
+        </div>
+    @endif
+
     @if ($vuokraukset->isEmpty())
         <p class="text-white">Ei vuokrauksia tällä hetkellä.</p>
     @else
@@ -30,7 +36,7 @@
                             @method('DELETE')
 
                             <button type="submit" class="px-3 py-1 mt-4 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
-                                Palautettu
+                                Palauta
                             </button>
                         </form>
                     </div>
