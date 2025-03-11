@@ -18,7 +18,7 @@
     </a>
 
     <div class="hidden md:block overflow-x-auto max-w-5xl mx-auto rounded-md">
-        <table class="min-w-full bg-transparent text-center border border-gray-300">
+        <table class="min-w-full bg-black bg-opacity-20 text-center border border-gray-300">
             <thead class="bg-transparent">
                 <tr>
                     <th class="border border-gray-400 px-4 py-3">ID</th>
@@ -61,7 +61,7 @@
 
     <div class="block md:hidden mx-4 bg-transparent">
         @foreach ($asiakkaat as $asiakas)
-        <div class="bg-transparent border border-gray-500 rounded p-4 mb-4 shadow-md">
+        <div class="bg-black bg-opacity-20  border border-gray-500 rounded p-4 mb-4 shadow-md">
             <p><span class="font-bold">ID:</span> {{ $asiakas->id }}</p>
             <p><span class="font-bold">Etunimi:</span> {{ $asiakas->etunimi }}</p>
             <p><span class="font-bold">Sukunimi:</span> {{ $asiakas->sukunimi }}</p>
