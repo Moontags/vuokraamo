@@ -13,12 +13,12 @@
 
     <h1 class="text-3xl font-bold mb-8 text-center">Asiakastiedot</h1>
 
-    <a href="{{ route('asiakas.create') }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition mb-4 inline-block ml-4">
+    <a href="{{ route('asiakas.create') }}" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition mb-4 inline-block ml-4">
         Uusi asiakas
     </a>
 
     <div class="hidden md:block overflow-x-auto max-w-5xl mx-auto rounded-md">
-        <table class="min-w-full bg-black bg-opacity-20 text-center border border-gray-300">
+        <table class="min-w-full bg-black bg-opacity-20 text-center border border-gray-500">
             <thead class="bg-transparent">
                 <tr>
                     <th class="border border-gray-400 px-4 py-3">ID</th>
@@ -37,16 +37,16 @@
                         <td class="border border-gray-400 px-4 py-2">{{ $asiakas->sahkoposti }}</td>
                         <td class="border border-gray-400 px-4 py-2">
                             <div class="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-2">
-                                <a href="{{ route('asiakas.show', $asiakas->id) }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                                <a href="{{ route('asiakas.show', $asiakas->id) }}" class="px-3 py-1 border border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                                     Näytä
                                 </a>
-                                <a href="{{ route('asiakas.edit', $asiakas->id) }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                                <a href="{{ route('asiakas.edit', $asiakas->id) }}" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                                     Muokkaa
                                 </a>
                                 <form action="{{ route('asiakas.destroy', $asiakas->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition"
+                                    <button type="submit" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition"
                                             onclick="return confirm('Haluatko varmasti poistaa tämän asiakkaan?')">
                                         Poista
                                     </button>

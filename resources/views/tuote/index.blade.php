@@ -11,7 +11,7 @@
     <div class="flex justify-between items-center mb-6 px-4">
         <h1 class="text-3xl font-bold text-white text-center flex-grow">Autonvuokraus</h1>
         @if(Auth::check() && Auth::user()->role === 'admin')
-            <a href="{{ route('tuote.create') }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+            <a href="{{ route('tuote.create') }}" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                 Lisää
             </a>
         @endif
@@ -31,20 +31,20 @@
                     {{ number_format($tuote->hinta, 2) }} € / Vuorokausi
                 </div>
                 <a href="{{ route('vuokraus.create', ['tuoteID' => $tuote->tuoteID]) }}"
-                   class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                   class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     Vuokraa
                 </a>
             </div>
 
             <div class="flex justify-center space-x-6 mt-8">
                 <a href="{{ route('tuote.show', ['tuote' => $tuote->tuoteID]) }}"
-                   class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                   class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                    Katso
                 </a>
 
                 @if(Auth::check() && Auth::user()->role === 'admin')
                     <a href="{{ route('tuote.edit', ['tuote' => $tuote->tuoteID]) }}"
-                       class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                       class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                        Päivitä
                     </a>
                     <form action="{{ route('tuote.destroy', ['tuote' => $tuote->tuoteID]) }}"
@@ -65,11 +65,11 @@
 
         <div class="flex justify-between items-center mt-8 px-4">
             @if ($tuotes->onFirstPage())
-                <button class="px-3 py-1 border border-white text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
+                <button class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </button>
             @else
-                <a href="{{ $tuotes->previousPageUrl() }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                <a href="{{ $tuotes->previousPageUrl() }}" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     <i class="bi bi-arrow-left"></i> Edellinen
                 </a>
             @endif
