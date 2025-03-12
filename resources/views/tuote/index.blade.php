@@ -12,7 +12,7 @@
         <h1 class="text-3xl font-bold text-white text-center flex-grow">Autonvuokraus</h1>
         @if(Auth::check() && Auth::user()->role === 'admin')
             <a href="{{ route('tuote.create') }}" class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
-                Lisää
+                Lisää auto
             </a>
         @endif
     </div>
@@ -75,7 +75,7 @@
             @endif
 
             @if ($tuotes->hasMorePages())
-                <a href="{{ $tuotes->nextPageUrl() }}" class="px-3 py-1 border border-white text-white rounded-md bg-transparent hover:bg-slate-800 transition">
+                <a href="{{ $tuotes->nextPageUrl() }}" class="px-3 py-1 border border-gray-500 text-white rounded-md bg-transparent hover:bg-slate-800 transition">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </a>
             @else
