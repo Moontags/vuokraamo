@@ -79,7 +79,7 @@
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </a>
             @else
-                <button class="px-3 py-1 border border-white text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
+                <button class="px-3 py-1 border  border-gray-500 text-white rounded-md bg-transparent opacity-50 cursor-not-allowed">
                     Seuraava <i class="bi bi-arrow-right"></i>
                 </button>
             @endif
